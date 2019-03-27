@@ -12,3 +12,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.navigation{
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.searchBar{
+  display: flex;
+}
+
+.searchResults{
+  display: flex;
+  justify-content: center;
+}
+
+.searchResultList{
+  list-style: none;
+  display: table-cell;
+}
