@@ -1,30 +1,27 @@
 import React from 'react';
-import APIModule from '../modules';
-import { Navbar } from './Navbar';
 
 export default class Search extends React.Component{
     constructor(props){
         super(props);
-        this.state = { auctions: [], searchValue: "", foundAuctions: [] };
-        this.handleSearchValue = this.handleSearchValue.bind(this);
+        this.state = { foundAuctions: [] };
     }
 
     componentDidMount(){
-        APIModule.GetAuctions().then(function(promise){ return promise; }).then(data => this.setState({ auctions: data }));
+        let currentAuctions = this.props.auctions;
+        let value = this.props.searchValue;
+        let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value) !== -1});
+        this.setState({ foundAuctions: auctionFound });
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.searchValue !== this.state.searchValue){
-            let currentAuctions = this.state.auctions;
-            let value = this.state.searchValue;
+    componentDidUpdate(prevProps){
+        if(prevProps.searchValue !== this.props.searchValue){
+            let currentAuctions = this.props.auctions;
+            let value = this.props.searchValue;
+            console.log(currentAuctions);
+            console.log(value);
             let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value) !== -1});
             this.setState({ foundAuctions: auctionFound });
         }
-    }
-
-    handleSearchValue(value){
-        this.setState({ searchValue: value });
-        console.log(value);
     }
 
     render(){
@@ -47,7 +44,6 @@ export default class Search extends React.Component{
         }
         return (
             <div className="searchResults">
-                <Navbar searchValue={this.state.searchValue} onClick={this.handleSearchValue}/>
                 <div className="searchContainer">
                     <ul className="searchResultList">
                         {auctions}

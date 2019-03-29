@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import StartPage from "./components/StartPage";
 import * as serviceWorker from "./serviceWorker";
-import CreateAuction from "./components/CreateAuction";
+import AuctionApp from "./AuctionApp";
 
-ReactDOM.render(<CreateAuction />, document.getElementById("root"));
+ReactDOM.render(<AuctionApp />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
