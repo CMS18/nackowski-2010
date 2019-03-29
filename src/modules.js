@@ -1,7 +1,7 @@
 export var APIModule = (function(){
 
     async function FetchAuctions(){
-        let url = 'http://nackowskis.azurewebsites.net/api/Auktion/7';
+        let url = 'http://nackowskis.azurewebsites.net/api/Auktion/2010';
         return await fetch(url).then(function(data){ return data.json(); });
     }
 
