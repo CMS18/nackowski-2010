@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { APIModule } from '../modules';
 import moment from "moment";
 import "moment/locale/sv";
 
@@ -39,35 +40,6 @@ export default class CreateAuction extends Component {
     return valid;
   };
 
-  createAuction = () => {
-    const url = "http://nackowskis.azurewebsites.net/api/Auktion/2010";
-    const {
-      title,
-      description,
-      startDate,
-      dueDate,
-      acceptedPrice,
-      createdBy
-    } = this.state;
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        Titel: title,
-        Beskrivning: description,
-        StartDatum: startDate,
-        SlutDatum: dueDate,
-        Gruppkod: 2010,
-        Utropspris: acceptedPrice,
-        SkapadAv: createdBy
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(function(data) {
-      console.log("Request success: ", "posten skapad");
-    });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     if (this.formValid(this.state)) {
@@ -82,7 +54,7 @@ export default class CreateAuction extends Component {
       `
       );
 
-      this.createAuction();
+      APIModule.PostAuction(this.state);
     } else {
       console.error("Error");
     }
