@@ -276,6 +276,13 @@ input.error {
   cursor: pointer;
 }
 
+.detailViewContent{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
 /*BEGIN-STARTSIDAN*/
 
 .startPage-Items {
