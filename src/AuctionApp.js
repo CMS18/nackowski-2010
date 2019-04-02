@@ -10,7 +10,7 @@ import { APIModule } from './modules';
 export default class AuctionApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { auctions: [], searchValue: '', detailViewRoutes: [] };
+    this.state = { auctions: [], searchValue: '', bids: [] };
     this.onChange = this.onChange.bind(this);
   }
 
