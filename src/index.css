@@ -144,12 +144,13 @@ input.error {
 .searchBar{
   display: flex;
   height: 5vh;
+  width: 20%;
 }
 
 #searchField{
   border-radius: .8rem 0 0 .8rem;
   text-align: center;
-  width: 30vh;
+  width: 100%;
   border: none;
 }
 
@@ -160,7 +161,7 @@ input.error {
 #searchButton{
   border-radius: 0 .8rem .8rem 0;
   background-color: darkslategray;
-  width: 100%;
+  width: 5vh;
   height: 100%;
   border: none;
   cursor: pointer;
@@ -174,11 +175,19 @@ input.error {
   outline: none;
 }
 
+@keyframes getResults{
+  0% {margin-left: 1000px;}
+  100%{margin-left: 155px;}
+}
+
 .searchContainer{
   margin: auto;
   width: 80%;
   display: flex;
   justify-content: center;
+  animation-name: getResults;
+  animation-timing-function: ease;
+  animation-duration: 1s;
 }
 
 .searchResults{
@@ -195,12 +204,13 @@ input.error {
   padding: 0.1%;
   height: 3vh;
   border-radius: .8em .8em .8em .8em; 
+  box-shadow: 0px 2px 15px #555;
 }
 
 .validDates{
   width: 50%;
   border-radius: .8em .8em .8em .8em; 
-  background-color: black;
+  background-color: darkslategrey;
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
@@ -242,18 +252,29 @@ input.error {
   height: 50%;
   width: 30%;
   text-align: center;
-  margin-bottom: 1%;
+  padding: 0;
   list-style: none;
-  display: grid;
-  margin-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: center;
 }
 
 .foundAuctions{
-  border: 1px solid black;
   transition-duration: 1s;
-  box-shadow: 2px 2px 4px black;
+  box-shadow: 0px 10px 50px #555;
   border-radius: .4em .4em .4em 0.4em;
-  margin-bottom: 1%;
+  margin-bottom: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.foundAuctions:hover{
+  padding-left: 2%;
+  padding-right: 2%;
+  cursor: pointer;
 }
 
 /*BEGIN-STARTSIDAN*/
