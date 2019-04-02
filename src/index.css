@@ -1,15 +1,15 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} 
+}
 
 .wrapper {
   width: 100%;
@@ -43,8 +43,8 @@ h1 {
   width: 100%;
   color: #111;
   font-weight: lighter;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label {
@@ -84,18 +84,17 @@ input.error {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-}
-
-.title,
-.acceptedPrice,
-.description,
-.createdBy {
   width: 100%;
 }
 
+.startDate {
+  margin-right: 5%;
+}
 .startDate,
 .dueDate {
-  width: 50%;
+  width: 47.5%;
+  display: flex;
+  flex-direction: column;
 }
 
 .createdBy {
@@ -128,7 +127,7 @@ input.error {
   border: 2px solid #519e8a;
 }
 
-.navigation{
+.navigation {
   width: 100%;
   margin: auto;
   position: fixed;
@@ -141,37 +140,43 @@ input.error {
   background-color: #ffcf3c;
 }
 
-.searchBar{
+.searchBar {
   display: flex;
   height: 5vh;
+  width: 20%;
 }
 
-#searchField{
-  border-radius: .8rem 0 0 .8rem;
+#searchField {
+  border-radius: 0.8rem 0 0 0.8rem;
   text-align: center;
-  width: 30vh;
+  width: 100%;
   border: none;
 }
 
-#searchField:focus{
+#searchField:focus {
   outline: none;
 }
 
-#searchButton{
-  border-radius: 0 .8rem .8rem 0;
+#searchButton {
+  border-radius: 0 0.8rem 0.8rem 0;
   background-color: darkslategray;
-  width: 100%;
+  width: 5vh;
   height: 100%;
   border: none;
   cursor: pointer;
 }
 
-#searchButton:hover{
+#searchButton:hover {
   background-color: blueviolet;
 }
 
-#searchButton:focus{
+#searchButton:focus {
   outline: none;
+}
+
+@keyframes getResults{
+  0% {margin-left: 1000px;}
+  100%{margin-left: 155px;}
 }
 
 .searchContainer{
@@ -179,13 +184,16 @@ input.error {
   width: 80%;
   display: flex;
   justify-content: center;
+  animation-name: getResults;
+  animation-timing-function: ease;
+  animation-duration: 1s;
 }
 
-.searchResults{
+.searchResults {
   margin: auto;
 }
 
-.dateCheck{
+.dateCheck {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -195,38 +203,39 @@ input.error {
   padding: 0.1%;
   height: 3vh;
   border-radius: .8em .8em .8em .8em; 
+  box-shadow: 0px 2px 15px #555;
 }
 
-.validDates{
+.validDates {
   width: 50%;
   border-radius: .8em .8em .8em .8em; 
-  background-color: black;
+  background-color: darkslategrey;
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
 }
 
-.invalidDates{
+.invalidDates {
   width: 50%;
-  border-radius: .8em .8em .8em .8em; 
+  border-radius: 0.8em 0.8em 0.8em 0.8em;
 }
 
-.dateChoices{
+.dateChoices {
   display: flex;
   justify-content: center;
   margin-top: 10%;
   padding: 1%;
 }
 
-.oldText{
+.oldText {
   margin-left: 1%;
 }
 
-.currentText{
+.currentText {
   margin-right: 1%;
 }
 
-.radioButtons{
+.radioButtons {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -238,50 +247,66 @@ input.error {
   cursor: pointer;
 }
 
-.searchResultList{
+.searchResultList {
   height: 50%;
   width: 30%;
   text-align: center;
-  margin-bottom: 1%;
+  padding: 0;
   list-style: none;
-  display: grid;
-  margin-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: center;
 }
 
 .foundAuctions{
-  border: 1px solid black;
   transition-duration: 1s;
-  box-shadow: 2px 2px 4px black;
+  box-shadow: 0px 10px 50px #555;
   border-radius: .4em .4em .4em 0.4em;
-  margin-bottom: 1%;
+  margin-bottom: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.foundAuctions:hover{
+  padding-left: 2%;
+  padding-right: 2%;
+  cursor: pointer;
+}
+
+.detailViewContent{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
 }
 
 /*BEGIN-STARTSIDAN*/
 
-.startPage-Items{
+.startPage-Items {
   display: flex;
   justify-content: center;
 }
 
-.items{
+.items {
   margin-top: 10%;
 }
 
 #StartPage-h1 {
   width: 100%;
-  text-align: center; 
+  text-align: center;
 }
 #p-tag-under-h1 {
   width: 100%;
-  text-align: center; 
+  text-align: center;
 }
 
 h2 {
   width: 100%;
-  text-align: center; 
+  text-align: center;
 }
-
-
 
 /*Test*/
 .auction-items-container {
@@ -338,3 +363,8 @@ h2 {
   bottom: 0;
   left: 0;
 }*/
+
+.columns {
+  justify-content: space-between;
+  display: flex;
+}

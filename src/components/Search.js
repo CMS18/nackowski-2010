@@ -1,17 +1,25 @@
 import React from 'react';
+import { BidView } from './BidView';
+import { NavLink } from 'react-router-dom';
 
 export default class Search extends React.Component{
     constructor(props){
         super(props);
         this.state = { foundAuctions: [] };
-        this.handleDateChoice = this.handleDateChoice.bind(this);
+        this.handleValidDateChoice = this.handleValidDateChoice.bind(this);
+        this.handleInvalidDateChoice = this.handleInvalidDateChoice.bind(this);
     }
 
     componentDidMount(){
         let currentAuctions = this.props.auctions;
         let value = this.props.searchValue;
-        let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value) !== -1});
-        this.setState({ foundAuctions: auctionFound });
+        let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
+        let validAuctions = auctionFound.filter(function(auction){ 
+            let todaysDate = new Date();
+            let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
+            return +todaysDate < +dueDate;
+        });
+        this.setState({ foundAuctions: validAuctions });
     }
 
     componentDidUpdate(prevProps){
@@ -20,32 +28,39 @@ export default class Search extends React.Component{
             let value = this.props.searchValue;
             console.log(currentAuctions);
             console.log(value);
-            let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value) !== -1});
+            let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
             this.setState({ foundAuctions: auctionFound });
         }
     }
 
-    handleDateChoice(e){
+    handleValidDateChoice(e){
         let radioOne = document.getElementById('ValidDates');
         let radioTwo = document.getElementById('InvalidDates');
+        radioOne.style.backgroundColor = "darkslategrey";
+        radioTwo.style.backgroundColor = "white";
+        let value = this.props.searchValue;
+        let auctionFound = this.props.auctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
+        let validAuctions = auctionFound.filter(function(auction){ 
+            let todaysDate = new Date();
+            let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
+            return +todaysDate < +dueDate;
+        });
+        this.setState({ foundAuctions: validAuctions});
+    }
 
-        if(radioOne.style.backgroundColor !== "black"){
-            radioOne.style.backgroundColor = "black";
-            radioOne.style.color = "white";
-            radioTwo.style.backgroundColor = "white";
-            radioTwo.style.color = "black";
-
-            //DateSort Current
-        }
-        else{
-            radioOne.style.backgroundColor = "white";
-            radioOne.style.color = "black";
-            radioTwo.style.backgroundColor = "black";
-            radioOne.style.color = "white";
-
-            //DateSort Old
-        }
-        
+    handleInvalidDateChoice(e){
+        let radioOne = document.getElementById('ValidDates');
+        let radioTwo = document.getElementById('InvalidDates');
+        radioOne.style.backgroundColor = "white";
+        radioTwo.style.backgroundColor = "darkslategrey";
+        let value = this.props.searchValue;
+        let auctionFound = this.props.auctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
+        let validAuctions = auctionFound.filter(function(auction){ 
+            let todaysDate = new Date();
+            let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
+            return +todaysDate > +dueDate;
+        });
+        this.setState({ foundAuctions: validAuctions });
     }
 
     render(){
@@ -59,25 +74,29 @@ export default class Search extends React.Component{
             );
         else{
             auctions = this.state.foundAuctions.map(auction => 
-                <li className="foundAuctions" key={auction.AuktionID}>
-                    <h2>{auction.Titel}</h2>
-                    <p>Auction ends at: {auction.SlutDatum.replace('T', ' ')}</p>
-                    <h5>Price: {auction.Utropspris}</h5>
-                </li>
+                
+                    <li className="foundAuctions" key={auction.AuktionID}>
+                        <NavLink to={"/DetailView/" + auction.Titel}>
+                            <h2>{auction.Titel}</h2>
+                            <p>Ends at: {auction.SlutDatum.replace('T', ' ')}</p>
+                            <h5>Price: {auction.Utropspris}</h5>
+                        </NavLink>
+                    </li>
             );
         }
         return (
             <div className="searchResults">
+                <BidView />
                 <div className="dateChoices">
                     <p className="currentText">Current Auctions</p>
                     <p className="oldText">Old Auctions</p>
                 </div>
                 <div className="dateCheck">
                     <div id="ValidDates" className="validDates">
-                        <input id="Valid" onClick={this.handleDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />
+                        <input id="Valid" onClick={this.handleValidDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />
                     </div>
                     <div id="InvalidDates" className="invalidDates">
-                        <input id="Invalid" onClick={this.handleDateChoice} className="radioButtons" type="radio" name="date" />
+                        <input id="Invalid" onClick={this.handleInvalidDateChoice} className="radioButtons" type="radio" name="date" />
                     </div>
                 </div>
                 <div className="searchContainer">
