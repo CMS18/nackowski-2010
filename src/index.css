@@ -280,7 +280,7 @@ input.error {
   cursor: pointer;
 }
 
-.detailViewContent{
+.detailViewContent {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -354,7 +354,7 @@ h2 {
   bottom: 0;
 }
 .auction-item:nth-child(-n+4) {
-  justify-content: space-between;
+  justify-content: space-between;/*
 }
 
 .auction-item:nth-child(n+4-n+2){
@@ -380,4 +380,17 @@ h2 {
 
 .labelsPresentation {
   margin-right: 60px;
+}
+
+.labelCols {
+  justify-content: space-between;
+  display: flex;
+}
+
+.presentCols {
+  display: flex;
+}
+
+.presentCol1 {
+  margin-right: 50px;
 }
