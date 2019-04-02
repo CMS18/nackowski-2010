@@ -76,7 +76,7 @@ export default class Search extends React.Component{
             auctions = this.state.foundAuctions.map(auction => 
                 
                     <li className="foundAuctions" key={auction.AuktionID}>
-                        <NavLink to={"/" + auction.Titel}>
+                        <NavLink to={"/DetailView/" + auction.Titel}>
                             <h2>{auction.Titel}</h2>
                             <p>Ends at: {auction.SlutDatum.replace('T', ' ')}</p>
                             <h5>Price: {auction.Utropspris}</h5>

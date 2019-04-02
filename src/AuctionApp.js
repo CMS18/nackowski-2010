@@ -27,7 +27,7 @@ export default class AuctionApp extends React.Component{
             <BrowserRouter>
                 <Navbar searchValue={this.state.searchValue} onChange={this.onChange} />
                 <Route exact path="/" component={() => <StartPage auctions={this.state.auctions} />} />
-                {this.state.auctions.map((auction) => ( <Route path={"/" + auction.Titel} component={() => <DetailView auctionID={auction.AuktionID} />} /> ))}
+                {this.state.auctions.map((auction) => ( <Route path={"/DetailView/" + auction.Titel} component={() => <DetailView auctionID={auction.AuktionID} />} /> ))}
                 <Route path="/CreateAuction" component={() => <CreateAuction />} />
                 <Route path="/Search" component={() => <Search auctions={this.state.auctions} searchValue={this.state.searchValue} />} />
             </BrowserRouter>
