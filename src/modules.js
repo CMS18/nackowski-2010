@@ -1,8 +1,13 @@
 export var APIModule = (function(){
 
     async function FetchAuctions(){
-        let url = 'http://nackowskis.azurewebsites.net/api/Auktion/2010';
+        let url = 'http://nackowskis.azurewebsites.net/api/Auktion/1';
         return await fetch(url).then(function(data){ return data.json(); });
+    }
+
+    async function FetchBids(id){
+      let url = 'http://nackowskis.azurewebsites.net/api/Bud/1/'+id;
+      return await fetch(url).then(function(data){return data.json();});
     }
 
     async function createAuction(auction){
@@ -34,5 +39,5 @@ export var APIModule = (function(){
         });
     }
 
-    return { GetAuctions: FetchAuctions, PostAuction: createAuction };
+    return { GetAuctions: FetchAuctions, GetBids: FetchBids, PostAuction: createAuction };
 })();
