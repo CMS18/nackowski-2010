@@ -24,7 +24,9 @@ export class BidView extends React.Component{
                 <div className="currentBidViewContent">
 
                 </div> : null}
-                <div className=""></div>
+                <div className="showBidsText">
+                    <p className="showBidsTag" onClick={this.handleOpenCurrentBidView}>Show bids</p>
+                </div>
             </div>
         );
     }

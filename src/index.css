@@ -140,6 +140,27 @@ input.error {
   background-color: #ffcf3c;
 }
 
+.navbarLink{
+  text-decoration: none;
+  color: black;
+  font-size: small;
+  font-variant: petite-caps;
+  text-shadow: 2px 2px 4px darkslategrey;
+}
+
+.logoText{
+  font-weight: bold;
+}
+
+.foundAuctionLinks{
+  text-decoration: none;
+  color: black;
+}
+
+.foundAuctionLinks > h2{
+  text-shadow: 2px 2px 8px darkslategray;
+}
+
 .searchBar {
   display: flex;
   height: 5vh;
@@ -261,7 +282,7 @@ input.error {
 
 .foundAuctions{
   transition-duration: 1s;
-  box-shadow: 0px 10px 50px #555;
+  box-shadow: 0px 10px 25px #555;
   border-radius: .4em .4em .4em 0.4em;
   margin-bottom: 5%;
   margin-left: 2%;
@@ -281,6 +302,16 @@ input.error {
   display: flex;
   justify-content: center;
   margin-top: 10%;
+}
+
+.showBidsText{
+  width: 5%;
+}
+
+.showBidsTag{
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
 }
 
 /*BEGIN-STARTSIDAN*/

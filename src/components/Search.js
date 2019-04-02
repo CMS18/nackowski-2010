@@ -76,7 +76,7 @@ export default class Search extends React.Component{
             auctions = this.state.foundAuctions.map(auction => 
                 
                     <li className="foundAuctions" key={auction.AuktionID}>
-                        <NavLink to={"/DetailView/" + auction.Titel}>
+                        <NavLink className="foundAuctionLinks" to={"/DetailView/" + auction.Titel}>
                             <h2>{auction.Titel}</h2>
                             <p>Ends at: {auction.SlutDatum.replace('T', ' ')}</p>
                             <h5>Price: {auction.Utropspris}</h5>
@@ -86,11 +86,11 @@ export default class Search extends React.Component{
         }
         return (
             <div className="searchResults">
-                <BidView />
                 <div className="dateChoices">
                     <p className="currentText">Current Auctions</p>
                     <p className="oldText">Old Auctions</p>
                 </div>
+                <BidView />
                 <div className="dateCheck">
                     <div id="ValidDates" className="validDates">
                         <input id="Valid" onClick={this.handleValidDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />
