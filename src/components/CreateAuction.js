@@ -1,7 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { APIModule } from '../modules';
-import moment from "moment";
-import "moment/locale/sv";
+import moment from 'moment';
+import 'moment/locale/sv';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Redirect } from 'react-router';
 
 export default class CreateAuction extends Component {
   constructor(props) {
@@ -13,13 +16,15 @@ export default class CreateAuction extends Component {
       startDate: null,
       dueDate: null,
       createdBy: null,
+      isFormValid: null,
+      redirectToStartPage: false,
       formErrors: {
-        title: "",
-        description: "",
-        acceptedPrice: "",
-        startDate: "",
-        dueDate: "",
-        createdBy: ""
+        title: 'En titel måste vara minst 5 tecken',
+        description: 'En beskrivning måste vara minst 5 tecken',
+        acceptedPrice: 'Ett belopp måste anges',
+        startDate: 'Ett datum måste anges',
+        dueDate: 'Ett datum måste anges',
+        createdBy: 'Ditt namn måste vara minst 3 tecken'
       }
     };
   }
@@ -27,12 +32,10 @@ export default class CreateAuction extends Component {
   formValid = ({ formErrors, ...rest }) => {
     let valid = true;
 
-    // validate form errors being empty
     Object.values(formErrors).forEach(val => {
       val.length > 0 && (valid = false);
     });
 
-    // validate the form was filled out
     Object.values(rest).forEach(val => {
       val === null && (valid = false);
     });
@@ -42,7 +45,9 @@ export default class CreateAuction extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     if (this.formValid(this.state)) {
+      this.setState({ isFormValid: true });
       console.log(
         `---Submitting---
       Titel: ${this.state.title}
@@ -55,30 +60,31 @@ export default class CreateAuction extends Component {
       );
 
       APIModule.PostAuction(this.state);
+      this.setState({ redirectToStartPage: true });
     } else {
-      console.error("Error");
+      this.setState({ isFormValid: false });
+      console.error('Error');
     }
   };
 
-  handlePriceChange = e => {
-    const { value } = e.target;
-    this.setState({ acceptedPrice: value });
+  handleStartDateChange = date => {
+    const { formErrors } = this.state;
+
+    formErrors.startDate = '';
+    formErrors.dueDate = 'Ett datum måste anges';
+
+    this.setState({
+      formErrors: formErrors,
+      startDate: date,
+      dueDate: null
+    });
   };
 
-  handleStartDateChange = e => {
-    const { value } = e.target;
-    console.log(
-      "value",
-      moment(value)
-        .add(1, "h")
-        .toString()
-    );
-    this.setState({ startDate: moment(value).add(1, "h") });
-  };
+  handleDueDateChange = date => {
+    const { formErrors } = this.state;
 
-  handleDueDateChange = e => {
-    const { value } = e.target;
-    this.setState({ dueDate: moment(value).add(2, "h") });
+    formErrors.dueDate = '';
+    this.setState({ formErrors: formErrors, dueDate: date });
   };
 
   handleChange = e => {
@@ -87,26 +93,52 @@ export default class CreateAuction extends Component {
     let formErrors = this.state.formErrors;
 
     switch (name) {
-      case "title":
+      case 'title':
         formErrors.title =
-          value.length < 5 ? "En titel måste vara minst 5 tecken" : "";
+          value.length < 5 ? 'En titel måste vara minst 5 tecken' : '';
         break;
-      case "description":
+      case 'description':
         formErrors.description =
-          value.length < 5 ? "En beskrivning måste vara minst 5 tecken" : "";
+          value.length < 5 ? 'En beskrivning måste vara minst 5 tecken' : '';
         break;
-      case "createdBy":
+      case 'createdBy':
         formErrors.createdBy =
-          value.length < 3 ? "Ditt namn måste vara minst 3 tecken" : "";
+          value.length < 3 ? 'Ditt namn måste vara minst 3 tecken' : '';
+        break;
+      case 'acceptedPrice':
+        formErrors.acceptedPrice =
+          value < 1 || value === '' ? 'Minsta belopp 1 sek' : '';
         break;
       default:
     }
-
     this.setState({ formErrors, [name]: value });
   };
 
   render() {
-    const { formErrors } = this.state;
+    const { formErrors, isFormValid } = this.state;
+    const isTitleValid = formErrors.title.length > 0 && isFormValid === false;
+    const isDescriptionValid =
+      formErrors.description.length > 0 && isFormValid === false;
+    const isCreatedByValid =
+      formErrors.createdBy.length > 0 && isFormValid === false;
+    const isAcceptedPriceValid =
+      formErrors.acceptedPrice.length > 0 && isFormValid === false;
+    const isStartDateValid =
+      formErrors.startDate.length > 0 && isFormValid === false;
+    const isDueDateValid =
+      formErrors.dueDate.length > 0 && isFormValid === false;
+
+    const minDueDate = this.state.startDate
+      ? moment(this.state.startDate, 'DD-MM-YYYY')
+          .add(1, 'days')
+          .toDate()
+      : new Date();
+
+    const redirectToStartPage = this.state.redirectToStartPage;
+    if (redirectToStartPage === true) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="wrapper">
         <div className="form-wrapper">
@@ -115,62 +147,79 @@ export default class CreateAuction extends Component {
             <div className="title">
               <label htmlFor="title">Titel:</label>
               <input
-                className={formErrors.title.length > 0 ? "error" : null}
+                className={isTitleValid ? 'error' : null}
                 type="text"
                 name="title"
                 placeholder="Exempel: Logitech G703 Lightspeed"
                 onChange={this.handleChange}
               />
-              {formErrors.title.length > 0 && (
+              {isTitleValid && (
                 <span className="errorMessage">{formErrors.title}</span>
               )}
             </div>
             <div className="description">
               <label htmlFor="description">Beskrivning:</label>
               <input
-                className={formErrors.description.length > 0 ? "error" : null}
+                className={isDescriptionValid ? 'error' : null}
                 type="text"
                 name="description"
                 onChange={this.handleChange}
               />
-              {formErrors.description.length > 0 && (
+              {isDescriptionValid && (
                 <span className="errorMessage">{formErrors.description}</span>
               )}
             </div>
             <div className="acceptedPrice">
               <label htmlFor="acceptedPrice">Accepterat pris:</label>
               <input
+                className={isAcceptedPriceValid ? 'error' : null}
                 type="number"
                 name="acceptedPrice"
-                onChange={this.handlePriceChange}
+                onChange={this.handleChange}
               />
+              {isAcceptedPriceValid && (
+                <span className="errorMessage">{formErrors.acceptedPrice}</span>
+              )}
             </div>
-            <br />
             <div className="startDate">
               <label htmlFor="startDate">Startdatum</label>
-              <input
-                type="date"
-                name="startDate"
+              <DatePicker
+                className={isStartDateValid ? 'error' : null}
+                selected={this.state.startDate}
+                timeInputLabel="Time:"
                 onChange={this.handleStartDateChange}
+                dateFormat="MM/dd/yyyy HH:mm"
+                showTimeInput
+                minDate={new Date()}
               />
+              {isStartDateValid && (
+                <span className="errorMessage">{formErrors.startDate}</span>
+              )}
             </div>
             <div className="dueDate">
               <label htmlFor="dueDate">Slutdatum</label>
-              <input
-                type="date"
-                name="dueDate"
+              <DatePicker
+                className={isDueDateValid ? 'error' : null}
+                selected={this.state.dueDate}
+                timeInputLabel="Time:"
                 onChange={this.handleDueDateChange}
+                dateFormat="MM/dd/yyyy HH:mm"
+                showTimeInput
+                minDate={minDueDate}
               />
+              {isDueDateValid && (
+                <span className="errorMessage">{formErrors.dueDate}</span>
+              )}
             </div>
             <div className="createdBy">
               <label htmlFor="createdBy">Skapad av:</label>
               <input
-                className={formErrors.createdBy.length > 0 ? "error" : null}
+                className={isCreatedByValid ? 'error' : null}
                 type="text"
                 name="createdBy"
                 onChange={this.handleChange}
               />
-              {formErrors.createdBy.length > 0 && (
+              {isCreatedByValid && (
                 <span className="errorMessage">{formErrors.createdBy}</span>
               )}
             </div>
