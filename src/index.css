@@ -174,16 +174,12 @@ input.error {
   outline: none;
 }
 
-<<<<<<< HEAD
 @keyframes getResults{
   0% {margin-left: 1000px;}
   100%{margin-left: 155px;}
 }
 
 .searchContainer{
-=======
-.searchContainer {
->>>>>>> 506381adf0fbf1f662944a241e08697dc494aa1b
   margin: auto;
   width: 80%;
   display: flex;
@@ -206,23 +202,14 @@ input.error {
   width: 15%;
   padding: 0.1%;
   height: 3vh;
-<<<<<<< HEAD
   border-radius: .8em .8em .8em .8em; 
   box-shadow: 0px 2px 15px #555;
-=======
-  border-radius: 0.8em 0.8em 0.8em 0.8em;
->>>>>>> 506381adf0fbf1f662944a241e08697dc494aa1b
 }
 
 .validDates {
   width: 50%;
-<<<<<<< HEAD
   border-radius: .8em .8em .8em .8em; 
   background-color: darkslategrey;
-=======
-  border-radius: 0.8em 0.8em 0.8em 0.8em;
-  background-color: black;
->>>>>>> 506381adf0fbf1f662944a241e08697dc494aa1b
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
@@ -272,7 +259,6 @@ input.error {
   justify-content: center;
 }
 
-<<<<<<< HEAD
 .foundAuctions{
   transition-duration: 1s;
   box-shadow: 0px 10px 50px #555;
@@ -288,14 +274,6 @@ input.error {
   padding-left: 2%;
   padding-right: 2%;
   cursor: pointer;
-=======
-.foundAuctions {
-  border: 1px solid black;
-  transition-duration: 1s;
-  box-shadow: 2px 2px 4px black;
-  border-radius: 0.4em 0.4em 0.4em 0.4em;
-  margin-bottom: 1%;
->>>>>>> 506381adf0fbf1f662944a241e08697dc494aa1b
 }
 
 /*BEGIN-STARTSIDAN*/
