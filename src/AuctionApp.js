@@ -7,19 +7,34 @@ import Navbar from './components/Navbar';
 import { DetailView } from './components/DetailView';
 import { APIModule } from './modules';
 
-export default class AuctionApp extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = { auctions: [], searchValue: "" };
-        this.onChange = this.onChange.bind(this);
-    }
+export default class AuctionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { auctions: [], searchValue: "", statusUpdated: false };
+    this.onChange = this.onChange.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
+  }
 
   componentDidMount() {
     APIModule.GetAuctions()
-      .then(function(promise) {
+      .then(function (promise) {
         return promise;
       })
       .then(data => this.setState({ auctions: data }));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.statusUpdated !== this.state.statusUpdated) {
+      APIModule.GetAuctions()
+        .then(function (promise) {
+          return promise;
+        })
+        .then(data => this.setState({ auctions: data }));
+    }
+  }
+
+  onUpdate(status) {
+    this.setState({ statusUpdated: status });
   }
 
   onChange(value) {
@@ -37,8 +52,8 @@ export default class AuctionApp extends React.Component{
         />
         {this.state.auctions.map(auction => (
           <Route
-            path={'/DetailView/' + auction.Titel}
-            component={() => <DetailView auction={auction} />}
+            path={'/DetailView/' + auction.AuktionID}
+            component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} />}
           />
         ))}
         <Route path="/CreateAuction" component={() => <CreateAuction />} />

@@ -108,7 +108,7 @@ input.error {
   align-items: center;
 }
 
-.createAuction button {
+.createAuction .createAuctionbtn {
   background-color: #519e8a;
   color: #fff;
   border: 2px solid #fff;
@@ -516,4 +516,31 @@ h2 {
 
 .presentCol1 {
   margin-right: 50px;
+}
+
+.form-wrapper2 {
+  margin-top: 10%;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 50px #555;
+  background-color: #ffffff;
+  height: 330px;
+}
+
+
+.createAuction .styledbtn {
+  background-color: #519e8a;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 100%;
+  width: 100px;
+  margin-top: 1em;
+  padding: 8px 0px;
+  font-size: 1em;
+  /* font-weight: lighter; */
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
 }

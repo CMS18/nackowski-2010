@@ -13,7 +13,7 @@ export var APIModule = (function () {
     });
   }
 
-  async function createAuction(auction) {
+  async function CreateAuction(auction) {
     const url = 'http://nackowskis.azurewebsites.net/api/Auktion/2010';
     const {
       title,
@@ -23,7 +23,7 @@ export var APIModule = (function () {
       acceptedPrice,
       createdBy
     } = auction;
-    fetch(url, {
+    await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         Titel: title,
@@ -46,7 +46,6 @@ export var APIModule = (function () {
     const url =
       'http://nackowskis.azurewebsites.net/api/Auktion/2010/' +
       auction.AuktionID;
-    console.log(url);
     var newauction = {
       AuktionID: auction.AuktionID,
       Titel: auction.Titel,
@@ -57,8 +56,7 @@ export var APIModule = (function () {
       Utropspris: auction.Utropspris,
       SkapadAv: auction.SkapadAv
     };
-    console.log('newauction', newauction);
-    fetch(url, {
+    await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(newauction),
       headers: {
@@ -70,10 +68,39 @@ export var APIModule = (function () {
     });
   }
 
+  async function DeleteAuction(auction) {
+    const url =
+      'http://nackowskis.azurewebsites.net/api/Auktion/2010?id=' +
+      auction.AuktionID;
+    console.log(url)
+    var deleteAuction = {
+      AuktionID: auction.AuktionID,
+      Titel: auction.Titel,
+      Beskrivning: auction.Beskrivning,
+      StartDatum: auction.StartDatum,
+      SlutDatum: auction.SlutDatum,
+      Gruppkod: 2010,
+      Utropspris: auction.Utropspris,
+      SkapadAv: auction.SkapadAv
+    };
+    console.log('deleteAuction', deleteAuction);
+    await fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify(deleteAuction),
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    }).then(function (data) {
+      console.log('Request success: ', 'posten borttagen');
+    });
+  }
+
   return {
     GetAuctions: FetchAuctions,
     GetBids: FetchBids,
-    PostAuction: createAuction,
-    UpdateAuction: UpdateAuction
+    PostAuction: CreateAuction,
+    UpdateAuction: UpdateAuction,
+    DeleteAuction: DeleteAuction
   };
 })();

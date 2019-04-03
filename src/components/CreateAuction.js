@@ -19,8 +19,8 @@ export default class CreateAuction extends Component {
       redirectToStartPage: false,
       formErrors: {
         isFormValid: null,
-        title: 'En titel måste vara minst 5 tecken',
-        description: 'En beskrivning måste vara minst 5 tecken',
+        title: 'En titel måste vara minst 3 tecken',
+        description: 'En beskrivning måste vara minst 3 tecken',
         acceptedPrice: 'Ett belopp måste anges',
         startDate: 'Ett datum måste anges',
         dueDate: 'Ett datum måste anges',
@@ -97,11 +97,11 @@ export default class CreateAuction extends Component {
     switch (name) {
       case 'title':
         formErrors.title =
-          value.length < 5 ? 'En titel måste vara minst 5 tecken' : '';
+          value.length < 3 ? 'En titel måste vara minst 3 tecken' : '';
         break;
       case 'description':
         formErrors.description =
-          value.length < 5 ? 'En beskrivning måste vara minst 5 tecken' : '';
+          value.length < 3 ? 'En beskrivning måste vara minst 3 tecken' : '';
         break;
       case 'createdBy':
         formErrors.createdBy =
