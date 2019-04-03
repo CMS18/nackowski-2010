@@ -15,15 +15,8 @@ export default class Search extends React.Component {
     componentDidMount() {
         let currentAuctions = this.props.auctions;
         let value = this.props.searchValue;
-<<<<<<< HEAD
-        let bidAuction = this.props.auctions.filter(function(auction){ return auction.AuktionID == "2067"});
-        this.setState({ selAuction: bidAuction });
-        let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
-        let validAuctions = auctionFound.filter(function(auction){ 
-=======
         let auctionFound = currentAuctions.filter(function (auction) { return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1 });
         let validAuctions = auctionFound.filter(function (auction) {
->>>>>>> 2546cd0dbde408e66dcb965897000d127d6e4927
             let todaysDate = new Date();
             let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
             return +todaysDate < +dueDate;
@@ -35,13 +28,9 @@ export default class Search extends React.Component {
         if (prevProps.searchValue !== this.props.searchValue) {
             let currentAuctions = this.props.auctions;
             let value = this.props.searchValue;
-<<<<<<< HEAD
-            let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
-=======
             console.log(currentAuctions);
             console.log(value);
             let auctionFound = currentAuctions.filter(function (auction) { return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1 });
->>>>>>> 2546cd0dbde408e66dcb965897000d127d6e4927
             this.setState({ foundAuctions: auctionFound });
         }
     }
