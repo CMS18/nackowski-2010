@@ -1,5 +1,4 @@
 import React from 'react';
-import { BidView } from './BidView';
 import { NavLink } from 'react-router-dom';
 
 export default class Search extends React.Component {
@@ -107,7 +106,6 @@ export default class Search extends React.Component {
                         <p className="currentText">Current Auctions</p>
                         <p className="oldText">Old Auctions</p>
                     </div>
-                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.selAuction} />
                     <div className="dateCheck">
                         <div id="ValidDates" className="validDates">
                             <input id="Valid" onClick={this.handleValidDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />

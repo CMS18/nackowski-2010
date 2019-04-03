@@ -13,7 +13,7 @@ export class DetailView extends React.Component {
       noUpdate: true,
       auction: props.auction,
       status: false,
-      bids: null,
+      bids: [],
       showBids: false
     };
     this.showUpdateDiv = this.showUpdateDiv.bind(this);
@@ -121,11 +121,14 @@ export class DetailView extends React.Component {
         .add(1, 'days')
         .toDate()
       : new Date();
-
+    let currentDate = new Date();
+    let auctionDate;
+    if(this.state.auction !== null){
+      auctionDate = new Date(this.state.auction.SlutDatum.replace('T', ' '));
+    }
     let length;
     if (this.state.bids !== null) {
-      // length = this.state.bids.length;
-      length = 2;
+      length = this.state.bids.length;
     }
 
     return (
@@ -135,7 +138,7 @@ export class DetailView extends React.Component {
             <div className="wrapper">
               <div className="form-wrapper2">
                 <div className="columns">
-                  <div>
+                  <div className="test1">
                     <h3>Vald auktion</h3>
                     <div className="presentCols">
                       <div className="presentCol1">
@@ -180,7 +183,8 @@ export class DetailView extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div className="test2">
+                    {+currentDate < +auctionDate ?
                     <div className="marginTopBtn">
                       <div className="createAuction">
                         <button className="styledbtn">Visa bud</button>
@@ -193,9 +197,10 @@ export class DetailView extends React.Component {
                         <button className="styledbtn" onClick={this.deleteAuction}>Ta bort</button>
                       </div>
                     </div>
+                    : null}
+                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} />
                   </div>
                 </div>
-                <div />
               </div>
             </div>
           ) : (
@@ -359,10 +364,10 @@ export class DetailView extends React.Component {
                   </div>
                 </div>
               </div>
-              <div />
+              <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} />
             </div>
           </div>
-          <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} />)}
+          )}
         </div>
           )};
       </div>

@@ -316,6 +316,14 @@ input.error {
   cursor: pointer;
 }
 
+.test1{
+  width: 70%;
+}
+
+.test2{
+  width: 30%;
+}
+
 .detailViewContent {
   margin: auto;
   display: flex;
@@ -328,6 +336,10 @@ input.error {
   text-align: center;
   display: flex;
   justify-content: center;
+}
+
+.winnerText{
+  text-align: center;
 }
 
 .makeNewBidContent{
@@ -343,7 +355,7 @@ input.error {
 }
 
 .bidInput{
-  width: 10%;
+  width: 90%;
   align-self: center;
 }
 
@@ -540,7 +552,6 @@ h2 {
   margin-top: 10%;
   width: 500px;
   display: flex;
-  flex-direction: column;
   padding: 20px 40px;
   border-radius: 10px;
   box-shadow: 0px 10px 50px #555;
