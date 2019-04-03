@@ -85,6 +85,23 @@ export default class StartPage extends React.Component{
         //     GetShortestTimeLeft*/
         //     console.log("PROPS: "+this.props.auctions);
         //     let data = this.GetHighestPriceFirst(this.props.auctions);
+        let testAuctions = this.state.auctions;
+        let test = auctions.map(function(auction){
+            let sorted = this.state.bids.sort(function(a,b){
+                return parseInt(b.Summa) - parseInt(a.Summa);
+            });
+            return (
+            <div>
+                <h1>{auction.Titel}</h1>
+                <h2>Highest price: {sorted[0].Summa}</h2>
+            </div>)
+        });
+        let test2 = auction.sort(function(a,b){
+            let sorted = this.state.bids.sort(function(a,b){
+                return parseInt(b.Summa) - parseInt(a.Summa);
+            });
+            for(var i = 0;)
+        })
         auctions = this.props.auctions.map(auction =>
             <div className="auction-item" key={auction.AuktionID}><p>{auction.Titel}</p></div>
         );

@@ -37,7 +37,7 @@ export default class Navbar extends React.Component{
                 </div>
                 <div className="pageNavigation">
                     <NavLink className="navbarLink" to="/CreateAuction">
-                        <h2>Create Auction</h2>
+                        <h2>Skapa auktion</h2>
                     </NavLink>
                 </div>
             </div>

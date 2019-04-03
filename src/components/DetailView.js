@@ -314,7 +314,7 @@ export class DetailView extends React.Component {
           <div className="wrapper">
             <div className="form-wrapper2">
               <div className="columns">
-                <div>
+                <div className="test1">
                   <h3>Vald auktion</h3>
                   <div className="presentCols">
                     <div className="presentCol1">
@@ -359,12 +359,12 @@ export class DetailView extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="test2">
                   <div className="marginTopBtn">
                   </div>
+                  <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} />
                 </div>
               </div>
-              <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} />
             </div>
           </div>
           )}

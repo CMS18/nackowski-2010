@@ -27,22 +27,18 @@ export default class Search extends React.Component {
         if (prevProps.searchValue !== this.props.searchValue) {
             let currentAuctions = this.props.auctions;
             let value = this.props.searchValue;
-            console.log(currentAuctions);
-            console.log(value);
             let auctionFound = currentAuctions.filter(function (auction) { return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1 });
             this.setState({ foundAuctions: auctionFound });
         }
     }
 
     handleShowBids() {
-        //this.props.handleShowBids();
         let root = document.getElementById('root');
         root.classList.add('removeScrollbar');
         this.setState({ showBids: true });
     }
 
     handleCloseBids() {
-        //this.props.handleCloseBids();
         let root = document.getElementById('root');
         root.classList.remove('removeScrollbar');
         this.setState({ showBids: false });
@@ -93,8 +89,8 @@ export default class Search extends React.Component {
                 <li className="foundAuctions" key={auction.AuktionID}>
                     <NavLink className="foundAuctionLinks" to={"/DetailView/" + auction.AuktionID}>
                         <h2>{auction.Titel}</h2>
-                        <p>Ends at: {auction.SlutDatum.replace('T', ' ')}</p>
-                        <h5>Price: {auction.Utropspris}</h5>
+                        <p>Slutar: {auction.SlutDatum.replace('T', ' ')}</p>
+                        <h5>Pris: {auction.Utropspris}</h5>
                     </NavLink>
                 </li>
             );
@@ -103,8 +99,8 @@ export default class Search extends React.Component {
             <div className="search">
                 <div className="searchResults">
                     <div className="dateChoices">
-                        <p className="currentText">Current Auctions</p>
-                        <p className="oldText">Old Auctions</p>
+                        <p className="currentText">Aktuella auktioner</p>
+                        <p className="oldText">Gamla auktioner</p>
                     </div>
                     <div className="dateCheck">
                         <div id="ValidDates" className="validDates">

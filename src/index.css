@@ -527,7 +527,8 @@ h2 {
 }
 
 .presentAuctionInfo {
-  height: 40px;
+  height: 65px;
+  overflow: auto;
   font-size: 20px;
 }
 
@@ -556,7 +557,7 @@ h2 {
   border-radius: 10px;
   box-shadow: 0px 10px 50px #555;
   background-color: #ffffff;
-  height: 330px;
+  height: 450px;
 }
 
 

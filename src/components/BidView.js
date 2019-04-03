@@ -3,6 +3,7 @@ import React from 'react';
 export class BidView extends React.Component{
     constructor(props){
         super(props);
+        this.state = { auctionID: "", sum: "", bidder: "" }
         this.handleOpenCurrentBidView = this.handleOpenCurrentBidView.bind(this);
         this.handleCloseCurrentBidView = this.handleCloseCurrentBidView.bind(this);
     }
@@ -35,8 +36,6 @@ export class BidView extends React.Component{
                     <p className="bidText">{bid.Summa}kr</p>
                 </div>
             );
-            console.log(bids);
-            console.log(this.props.bids);
         }
         return (
             <div className="bidViewContent">
@@ -45,39 +44,39 @@ export class BidView extends React.Component{
                 <div className="currentBidViewContent">
                     <div className="bidHistoryHeader">
                         <div className="bidHistoryHeaderText">
-                            <h5 className="bidHistoryText">Biddinghistory</h5>
+                            <h5 className="bidHistoryText">Budhistorik</h5>
                         </div>
                         <div className="closeButton">
                             <span onClick={this.handleCloseCurrentBidView}>X</span>
                         </div>
                     </div>
                     <div className="currentBids">
-                        <p>Current bid count: {this.props.bids.length}</p>
+                        <p>Nuvarande mängd bud: {this.props.bids.length}</p>
                         <div className="bidInfoText">
-                            <h4>Bidder:</h4>
-                            <h4>Bid ID:</h4>
-                            <h4>Bid:</h4>
+                            <h4>Budgivare:</h4>
+                            <h4>Bud ID:</h4>
+                            <h4>Bud:</h4>
                         </div>
                         {allBids}
                     </div>
                 </div> : null}
                 <div className="showBidsText">
-                    <p className="showBidsTag" onClick={this.handleOpenCurrentBidView}>Show bids</p>
+                    <p className="showBidsTag" onClick={this.handleOpenCurrentBidView}>Visa bud</p>
                 </div>
                 {+currentDate > +auctionDate ? 
                     <div className="showWinningBid">
                         <div className="winner">
                             {this.props.bids.length !== 0 ? 
                                 <div className="winnerText">
-                                    <h4>Bidder: {bids[0].Budgivare}</h4>
-                                    <h4>Bid ID: {bids[0].BudID}</h4>
-                                    <h4>Bid: {bids[0].Summa}</h4>
+                                    <h4>Vinnare: {bids[0].Budgivare}</h4>
+                                    <h4>Bud ID: {bids[0].BudID}</h4>
+                                    <h4>Bud: {bids[0].Summa}</h4>
                                 </div>
 
                             :
                             
                                 <div className="winnerText">
-                                    <h4>No bids were put on this auction.</h4>
+                                    <h4>Inget bud blev lagt på auktionen.</h4>
                                 </div>}
                         </div>
                     </div>  
