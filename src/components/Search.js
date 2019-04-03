@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 export default class Search extends React.Component{
     constructor(props){
         super(props);
-        this.state = { foundAuctions: [], showBids: false };
+        this.state = { foundAuctions: [], showBids: false, selAuction: [] };
         this.handleValidDateChoice = this.handleValidDateChoice.bind(this);
         this.handleInvalidDateChoice = this.handleInvalidDateChoice.bind(this);
         this.handleCloseBids = this.handleCloseBids.bind(this);
@@ -15,6 +15,8 @@ export default class Search extends React.Component{
     componentDidMount(){
         let currentAuctions = this.props.auctions;
         let value = this.props.searchValue;
+        let bidAuction = this.props.auctions.filter(function(auction){ return auction.AuktionID == "2067"});
+        this.setState({ selAuction: bidAuction });
         let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
         let validAuctions = auctionFound.filter(function(auction){ 
             let todaysDate = new Date();
@@ -28,8 +30,6 @@ export default class Search extends React.Component{
         if(prevProps.searchValue !== this.props.searchValue){
             let currentAuctions = this.props.auctions;
             let value = this.props.searchValue;
-            console.log(currentAuctions);
-            console.log(value);
             let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
             this.setState({ foundAuctions: auctionFound });
         }
@@ -107,7 +107,7 @@ export default class Search extends React.Component{
                         <p className="currentText">Current Auctions</p>
                         <p className="oldText">Old Auctions</p>
                     </div>
-                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} />
+                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.selAuction} />
                     <div className="dateCheck">
                         <div id="ValidDates" className="validDates">
                             <input id="Valid" onClick={this.handleValidDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />

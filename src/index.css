@@ -324,11 +324,29 @@ input.error {
 }
 
 .showBidsText {
-  width: 5%;
+  width: 100%;
   text-align: center;
   display: flex;
   justify-content: center;
 }
+
+.makeNewBidContent{
+  display: flex;
+  justify-content: center;
+}
+
+.newBidForm{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bidInput{
+  width: 10%;
+  align-self: center;
+}
+
 
 .showBidsTag {
   text-decoration: underline;

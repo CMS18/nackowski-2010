@@ -10,7 +10,7 @@ export class BidView extends React.Component{
     }
 
     componentDidMount(){
-        APIModule.GetBids("2067").then(function(response){ return response; }).then((data) => this.setState({ bids: data }));
+        APIModule.GetBids("2074").then(function(response){ return response; }).then((data) => this.setState({ bids: data }));
     }
 
     handleOpenCurrentBidView(){
@@ -22,17 +22,24 @@ export class BidView extends React.Component{
     }
 
     render(){
+        let auction = this.props.auction;
+        let currentDate = new Date();
+        let auctionDate;
+        if(auction.length !== 0){
+            auctionDate = new Date(auction[0].SlutDatum.replace('T', ' '));
+        }
+
         let bids = this.state.bids.sort(function(a, b){
             return parseInt(b.Summa) - parseInt(a.Summa);
         });
-        console.log(bids);
-        bids = bids.map((bid) => 
+        let allBids = bids.map((bid) => 
             <div className="bid">
                 <p className="bidText">{bid.Budgivare}</p>
                 <p className="bidText">{bid.BudID}</p>
                 <p className="bidText">{bid.Summa}kr</p>
             </div>
         );
+        console.log(bids[0]);
         return (
             <div className="bidViewContent">
                 {this.props.showBids ? <div className="currentBidViewBackdrop" onClick={this.handleCloseCurrentBidView}></div> : null}
@@ -53,12 +60,38 @@ export class BidView extends React.Component{
                             <h4>Bid ID:</h4>
                             <h4>Bid:</h4>
                         </div>
-                        {bids}
+                        {allBids}
                     </div>
                 </div> : null}
                 <div className="showBidsText">
                     <p className="showBidsTag" onClick={this.handleOpenCurrentBidView}>Show bids</p>
                 </div>
+                {+currentDate > +auctionDate ? 
+                    <div className="showWinningBid">
+                        <div className="winner">
+                            {bids.length !== 0 ? 
+                                <div className="winnerText">
+                                    <h4>Bidder: {bids[0].Budgivare}</h4>
+                                    <h4>Bid ID: {bids[0].BudID}</h4>
+                                    <h4>Bid: {bids[0].Summa}</h4>
+                                </div>
+
+                            :
+                            
+                                <div className="winnerText">
+                                    <h4>No bids were put on this auction.</h4>
+                                </div>}
+                        </div>
+                    </div>  
+                
+                : 
+                
+                    <div className="makeNewBidContent">
+                        <form className="newBidForm">
+                            <label>Place bid:</label>
+                            <input className="bidInput" />
+                        </form>
+                    </div> }
             </div>
         );
     }
