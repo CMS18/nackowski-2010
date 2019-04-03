@@ -192,7 +192,7 @@ export default class CreateAuction extends Component {
                 selected={this.state.startDate}
                 timeInputLabel="Time:"
                 onChange={this.handleStartDateChange}
-                dateFormat="MM/dd/yyyy HH:mm"
+                dateFormat="yyyy/MM/dd HH:mm"
                 showTimeInput
                 minDate={new Date()}
               />
@@ -207,7 +207,7 @@ export default class CreateAuction extends Component {
                 selected={this.state.dueDate}
                 timeInputLabel="Time:"
                 onChange={this.handleDueDateChange}
-                dateFormat="MM/dd/yyyy HH:mm"
+                dateFormat="yyyy/MM/dd HH:mm"
                 showTimeInput
                 minDate={minDueDate}
               />
