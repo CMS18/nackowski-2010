@@ -16,11 +16,11 @@ export default class CreateAuction extends Component {
       startDate: null,
       dueDate: null,
       createdBy: null,
-      isFormValid: null,
       redirectToStartPage: false,
       formErrors: {
-        title: 'En titel måste vara minst 5 tecken',
-        description: 'En beskrivning måste vara minst 5 tecken',
+        isFormValid: null,
+        title: 'En titel måste vara minst 3 tecken',
+        description: 'En beskrivning måste vara minst 3 tecken',
         acceptedPrice: 'Ett belopp måste anges',
         startDate: 'Ett datum måste anges',
         dueDate: 'Ett datum måste anges',
@@ -33,7 +33,7 @@ export default class CreateAuction extends Component {
     let valid = true;
 
     Object.values(formErrors).forEach(val => {
-      val.length > 0 && (valid = false);
+      val !== null && val.length > 0 && (valid = false);
     });
 
     Object.values(rest).forEach(val => {
@@ -45,9 +45,10 @@ export default class CreateAuction extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
+    const formErrors = this.state.formErrors;
     if (this.formValid(this.state)) {
-      this.setState({ isFormValid: true });
+      formErrors.isFormValid = true;
+      this.setState({ formErrors: formErrors });
       console.log(
         `---Submitting---
       Titel: ${this.state.title}
@@ -62,7 +63,8 @@ export default class CreateAuction extends Component {
       APIModule.PostAuction(this.state);
       this.setState({ redirectToStartPage: true });
     } else {
-      this.setState({ isFormValid: false });
+      formErrors.isFormValid = false;
+      this.setState({ formErrors: formErrors });
       console.error('Error');
     }
   };
@@ -95,11 +97,11 @@ export default class CreateAuction extends Component {
     switch (name) {
       case 'title':
         formErrors.title =
-          value.length < 5 ? 'En titel måste vara minst 5 tecken' : '';
+          value.length < 3 ? 'En titel måste vara minst 3 tecken' : '';
         break;
       case 'description':
         formErrors.description =
-          value.length < 5 ? 'En beskrivning måste vara minst 5 tecken' : '';
+          value.length < 3 ? 'En beskrivning måste vara minst 3 tecken' : '';
         break;
       case 'createdBy':
         formErrors.createdBy =
@@ -111,11 +113,13 @@ export default class CreateAuction extends Component {
         break;
       default:
     }
+
     this.setState({ formErrors, [name]: value });
   };
 
   render() {
-    const { formErrors, isFormValid } = this.state;
+    const { formErrors } = this.state;
+    const isFormValid = formErrors.isFormValid;
     const isTitleValid = formErrors.title.length > 0 && isFormValid === false;
     const isDescriptionValid =
       formErrors.description.length > 0 && isFormValid === false;
@@ -130,8 +134,8 @@ export default class CreateAuction extends Component {
 
     const minDueDate = this.state.startDate
       ? moment(this.state.startDate, 'DD-MM-YYYY')
-          .add(1, 'days')
-          .toDate()
+        .add(1, 'days')
+        .toDate()
       : new Date();
 
     const redirectToStartPage = this.state.redirectToStartPage;
@@ -188,7 +192,7 @@ export default class CreateAuction extends Component {
                 selected={this.state.startDate}
                 timeInputLabel="Time:"
                 onChange={this.handleStartDateChange}
-                dateFormat="MM/dd/yyyy HH:mm"
+                dateFormat="yyyy/MM/dd HH:mm"
                 showTimeInput
                 minDate={new Date()}
               />
@@ -203,7 +207,7 @@ export default class CreateAuction extends Component {
                 selected={this.state.dueDate}
                 timeInputLabel="Time:"
                 onChange={this.handleDueDateChange}
-                dateFormat="MM/dd/yyyy HH:mm"
+                dateFormat="yyyy/MM/dd HH:mm"
                 showTimeInput
                 minDate={minDueDate}
               />
@@ -224,7 +228,7 @@ export default class CreateAuction extends Component {
               )}
             </div>
             <div className="createAuction">
-              <button type="submit">Skapa auktion</button>
+              <button className="createAuctionbtn" type="submit">Skapa auktion</button>
             </div>
           </form>
         </div>
