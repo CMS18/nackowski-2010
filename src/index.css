@@ -323,12 +323,7 @@ input.error {
   margin-top: 10%;
 }
 
-<<<<<<< HEAD
-.showBidsText{
-  margin: auto;
-=======
 .showBidsText {
->>>>>>> 38409122b5d173ab0272823771e50c69e85b4e31
   width: 5%;
   text-align: center;
   display: flex;
