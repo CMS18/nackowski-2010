@@ -1,43 +1,45 @@
 import React from 'react';
 import { APIModule } from '../modules';
 
-function GetHighestPriceFirst(auctions){
-    console.log("GetHighestPriceFirst-func");
-    let orderdAuctions = [];
-    console.log("Auctions: "+auctions);
-        auctions.forEach(auc => {
-            orderdAuctions.push(GetBidsLocal(auc.AuktionID));
-            console.log("Orderd Auctions: "+orderdAuctions[0]);
-        });
-        let newoOderdAuctions = orderdAuctions.sort(
-            function(a, b) {
-                return (b.Summa[b.Summa.length-1] - a.Summa[b.Summa.length-1]); // Högst först
-            });
-    return newoOderdAuctions;
-}
-
 function GetShortestTimeLeft(auctions){
     console.log("GetShortestTimeLeft-func");
     return auctions;
 }
 
-function GetBidsLocal(id){
-    console.log("GetBids-func");
-    let bids = APIModule.GetBids(id).then(function(promise){ return promise; }).then(data => this.setState({ bids: data }));
-    return bids;
-}
-
 export default class StartPage extends React.Component{
     constructor(props){
         super(props);
-        this.state = {  selectedOption: "Valid", bids: []};
+        this.state = { selectedOption: "Valid", bids: [] };
         this.handleDateChoice = this.handleDateChoice.bind(this);
-        this.handleOptionChange = changeEvent => {
+        /*this.handleOptionChange = changeEvent => {
             this.setState({
               selectedOption: changeEvent.target.value
             });
             this.handleStartPageRadioButtons(this.state.selectedOption);
-          };
+        };*/
+    }
+
+    componentDidMount(){
+        this.props.auctions.map((auction) => (APIModule.GetBids(auction.AuktionID).then(function(promise){ return promise; }).then((data) => this.setState({ bids: this.state.bids.concat(data) }) )));
+    }
+
+    GetHighestPriceFirst(auctions){
+        console.log("GetHighestPriceFirst-func");
+        let orderdAuctions = [];
+        console.log("Auctions: "+auctions);
+        auctions.forEach(auc => {
+            orderdAuctions.push(this.state.bids.filter(function(bid){
+                
+            }));
+            console.log("Orderd Auctions: "+orderdAuctions[0]);
+        });
+        let newoOderdAuctions = orderdAuctions.sort(
+            function(a, b) {
+                return b.Summa < a.Summa; // Högst först
+            }
+        );
+        console.log(newoOderdAuctions);  
+        return newoOderdAuctions;
     }
 
     handleStartPageRadioButtons(value){
@@ -78,21 +80,26 @@ export default class StartPage extends React.Component{
 
     render(){
         let auctions;
-        if (this.state.selectedOption === "Valid"){ // Handpicked
-            /*GetHighestPrice
-            GetShortestTimeLeft*/
-            console.log("PROPS: "+this.props.auctions);
-            let data = GetHighestPriceFirst(this.props.auctions);
-            auctions = data.map(auction =>
-                <div className="auction-item" key={auction.AuktionID}><p>{auction.Titel}</p></div>
-            );
-        }
-        else if (this.state.selectedOption === "Invalid"){ // Short time left
-            let data = GetShortestTimeLeft(this.props.auctions);
-            auctions = data.map(auction => 
-                <div className="auction-item" key={auction.AuktionID}><p>{auction.Titel}</p></div>
-            );
-        }
+        // if (this.state.selectedOption === "Valid"){ // Handpicked
+        //     /*GetHighestPrice
+        //     GetShortestTimeLeft*/
+        //     console.log("PROPS: "+this.props.auctions);
+        //     let data = this.GetHighestPriceFirst(this.props.auctions);
+        auctions = this.props.auctions.map(auction =>
+            <div className="auction-item" key={auction.AuktionID}><p>{auction.Titel}</p></div>
+        );
+        let bids = this.state.bids.map((bid) => 
+            <div>
+                <h2>Summa: {bid.Summa}</h2>
+            </div>
+        );
+        // }
+        // else if (this.state.selectedOption === "Invalid"){ // Short time left
+        //     let data = GetShortestTimeLeft(this.props.auctions);
+        //     auctions = data.map(auction => 
+        //         <div className="auction-item" key={auction.AuktionID}><p>{auction.Titel}</p></div>
+        //     );
+        // }
             /*
                 <div className="dateCheck">
                     <div id="ValidDates" className="validDates">
@@ -152,6 +159,7 @@ export default class StartPage extends React.Component{
 
                     <div className="auction-items-container">
                         {auctions}
+                        {bids.length}
                     </div>
                 </div>
             </div>

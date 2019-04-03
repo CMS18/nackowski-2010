@@ -5,9 +5,11 @@ import { NavLink } from 'react-router-dom';
 export default class Search extends React.Component{
     constructor(props){
         super(props);
-        this.state = { foundAuctions: [] };
+        this.state = { foundAuctions: [], showBids: false };
         this.handleValidDateChoice = this.handleValidDateChoice.bind(this);
         this.handleInvalidDateChoice = this.handleInvalidDateChoice.bind(this);
+        this.handleCloseBids = this.handleCloseBids.bind(this);
+        this.handleShowBids = this.handleShowBids.bind(this);
     }
 
     componentDidMount(){
@@ -31,6 +33,20 @@ export default class Search extends React.Component{
             let auctionFound = currentAuctions.filter(function(auction){ return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1});
             this.setState({ foundAuctions: auctionFound });
         }
+    }
+
+    handleShowBids(){
+        //this.props.handleShowBids();
+        let root = document.getElementById('root');
+        root.classList.add('removeScrollbar');
+        this.setState({ showBids: true });
+    }
+
+    handleCloseBids(){
+        //this.props.handleCloseBids();
+        let root = document.getElementById('root');
+        root.classList.remove('removeScrollbar');
+        this.setState({ showBids: false });
     }
 
     handleValidDateChoice(e){
@@ -85,24 +101,26 @@ export default class Search extends React.Component{
             );
         }
         return (
-            <div className="searchResults">
-                <div className="dateChoices">
-                    <p className="currentText">Current Auctions</p>
-                    <p className="oldText">Old Auctions</p>
-                </div>
-                <BidView />
-                <div className="dateCheck">
-                    <div id="ValidDates" className="validDates">
-                        <input id="Valid" onClick={this.handleValidDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />
+            <div className="search">
+                <div className="searchResults">
+                    <div className="dateChoices">
+                        <p className="currentText">Current Auctions</p>
+                        <p className="oldText">Old Auctions</p>
                     </div>
-                    <div id="InvalidDates" className="invalidDates">
-                        <input id="Invalid" onClick={this.handleInvalidDateChoice} className="radioButtons" type="radio" name="date" />
+                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} />
+                    <div className="dateCheck">
+                        <div id="ValidDates" className="validDates">
+                            <input id="Valid" onClick={this.handleValidDateChoice} className="radioButtons" type="radio" name="date" defaultChecked />
+                        </div>
+                        <div id="InvalidDates" className="invalidDates">
+                            <input id="Invalid" onClick={this.handleInvalidDateChoice} className="radioButtons" type="radio" name="date" />
+                        </div>
                     </div>
-                </div>
-                <div className="searchContainer">
-                    <ul className="searchResultList">
-                        {auctions}
-                    </ul>
+                    <div className="searchContainer">
+                        <ul className="searchResultList">
+                            {auctions}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );

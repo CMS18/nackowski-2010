@@ -161,6 +161,13 @@ input.error {
   text-shadow: 2px 2px 8px darkslategray;
 }
 
+.search{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
 .searchBar {
   display: flex;
   height: 5vh;
@@ -210,8 +217,16 @@ input.error {
   animation-duration: 1s;
 }
 
+.removeScrollbar{
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
 .searchResults {
   margin: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .dateCheck {
@@ -305,13 +320,91 @@ input.error {
 }
 
 .showBidsText{
+  margin: auto;
   width: 5%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .showBidsTag{
   text-decoration: underline;
   color: blue;
   cursor: pointer;
+}
+
+.currentBidViewContent{
+  position: absolute;
+  background-color: white;
+  align-self: center;
+  top: 10%;
+  left: 27.5%;
+  width: 45%;
+  height: 65%;
+  border-radius: .4em .4em .4em .4em;
+  box-shadow: 0px 20px 50px #555;
+  z-index: 50;
+}
+
+.bidText{
+  width: 30%;
+}
+
+.currentBids{
+  width: 90%;
+  height: 75%;
+  margin: auto;
+  overflow-y: scroll;
+}
+
+.closeButton{
+  width: 2%;
+  margin: auto;
+  font-size: larger;
+  margin-right: 2%;
+  margin-top: 1%;
+  cursor: pointer;
+}
+
+.currentBidViewBackdrop{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0.5;
+}
+
+.bidInfoText{
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 3%;
+  border-bottom: 1px solid black;
+}
+
+.bidHistoryHeader{
+  display: flex;
+}
+
+.bidHistoryHeaderText{
+  width: 98%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.bidHistoryText{
+  margin-left: 2%;
+  font-size: large;
+}
+
+.bid{
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
 }
 
 /*BEGIN-STARTSIDAN*/

@@ -6,8 +6,8 @@ export var APIModule = (function(){
     }
 
     async function FetchBids(id){
-      let url = 'http://nackowskis.azurewebsites.net/api/Bud/1/'+id;
-      return await fetch(url).then(function(data){return data.json();});
+      let url = 'http://nackowskis.azurewebsites.net/api/Bud/1/' + id;
+      return await fetch(url).then(function(data){ return data.json(); });
     }
 
     async function createAuction(auction){
