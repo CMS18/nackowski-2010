@@ -313,6 +313,9 @@ h2 {
   background-color: lightblue;
   border: 1px solid green;
   padding: 20px 0 20px 0;
+  width: 80%;
+  position: relative;
+  left: 10%;
 
   display: flex;
   justify-content: center;
@@ -320,15 +323,20 @@ h2 {
 }
 
 .auction-item {
+  height: 220px;
   background-color: white;
   width: 20%;
   margin: 1%;
   border: 1px solid red;
 }
 
-.auction-item p {
-  height: 20%;
+.auction-item :nth-child(1) {
   padding-top: 80%;
+  top: 0;
+  left: 0;
+}
+.auction-item :nth-child(1) {
+  padding-top: 1%;
   bottom: 0;
   left: 0;
 }

@@ -1,12 +1,12 @@
 export var APIModule = (function(){
 
     async function FetchAuctions(){
-        let url = 'http://nackowskis.azurewebsites.net/api/Auktion/1';
+        let url = 'http://nackowskis.azurewebsites.net/api/Auktion/2010';
         return await fetch(url).then(function(data){ return data.json(); });
     }
 
     async function FetchBids(id){
-      let url = 'http://nackowskis.azurewebsites.net/api/Bud/1/'+id;
+      let url = 'http://nackowskis.azurewebsites.net/api/Bud/2010/'+id;
       return await fetch(url).then(function(data){return data.json();});
     }
 
