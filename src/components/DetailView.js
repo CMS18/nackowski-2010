@@ -187,10 +187,10 @@ export class DetailView extends React.Component {
                           <label>{this.props.auction.Utropspris}</label>
                         </div>
                         <div className="presentAuctionInfo">
-                          <label>{this.props.auction.StartDatum}</label>
+                          <label>{this.props.auction.StartDatum.replace('T', ' ')}</label>
                         </div>
                         <div className="presentAuctionInfo">
-                          <label>{this.props.auction.SlutDatum}</label>
+                          <label>{this.props.auction.SlutDatum.replace('T', ' ')}</label>
                         </div>
                         <div className="presentAuctionInfo">
                           <label>{this.props.auction.SkapadAv}</label>
@@ -362,10 +362,10 @@ export class DetailView extends React.Component {
                         <label>{this.props.auction.Utropspris}</label>
                       </div>
                       <div className="presentAuctionInfo">
-                        <label>{this.props.auction.StartDatum}</label>
+                        <label>{this.props.auction.StartDatum.replace('T', ' ')}</label>
                       </div>
                       <div className="presentAuctionInfo">
-                        <label>{this.props.auction.SlutDatum}</label>
+                        <label>{this.props.auction.SlutDatum.replace('T', ' ')}</label>
                       </div>
                       <div className="presentAuctionInfo">
                         <label>{this.props.auction.SkapadAv}</label>
