@@ -79,6 +79,11 @@ export var APIModule = (function () {
       Utropspris: auction.Utropspris,
       SkapadAv: auction.SkapadAv
     };
+
+    let testStart = new Date(newauction.StartDatum);
+    testStart.setHours(testStart.getHours() + 2);
+    console.log(testStart);
+
     await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(newauction),

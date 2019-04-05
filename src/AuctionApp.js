@@ -6,6 +6,7 @@ import Search from './components/Search';
 import Navbar from './components/Navbar';
 import { DetailView } from './components/DetailView';
 import { APIModule } from './modules';
+import { AuctionFooter } from './components/AuctionFooter';
 
 export default class AuctionApp extends React.Component {
   constructor(props) {
@@ -44,29 +45,32 @@ export default class AuctionApp extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Navbar searchValue={this.state.searchValue} onChange={this.onChange} />
-        <Route
-          exact
-          path="/"
-          component={() => <StartPage auctions={this.state.auctions} />}
-        />
-        {this.state.auctions.map(auction => (
+        <div className="pageContent">
+          <Navbar searchValue={this.state.searchValue} onChange={this.onChange} />
           <Route
-            key={auction.AuktionID}
-            path={'/DetailView/' + auction.AuktionID}
-            component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} />}
+            exact
+            path="/"
+            component={() => <StartPage auctions={this.state.auctions} />}
           />
-        ))}
-        <Route path="/CreateAuction" component={() => <CreateAuction />} />
-        <Route
-          path="/Search"
-          component={() => (
-            <Search
-              auctions={this.state.auctions}
-              searchValue={this.state.searchValue}
+          {this.state.auctions.map(auction => (
+            <Route
+              key={auction.AuktionID}
+              path={'/DetailView/' + auction.AuktionID}
+              component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} />}
             />
-          )}
-        />
+          ))}
+          <Route path="/CreateAuction" component={() => <CreateAuction />} />
+          <Route
+            path="/Search"
+            component={() => (
+              <Search
+                auctions={this.state.auctions}
+                searchValue={this.state.searchValue}
+              />
+            )}
+          />
+          <AuctionFooter />
+        </div>
       </BrowserRouter>
     );
   }

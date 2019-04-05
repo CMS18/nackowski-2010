@@ -9,7 +9,7 @@ function GetShortestTimeLeft(auctions){
 export default class StartPage extends React.Component{
     constructor(props){
         super(props);
-        this.state = { selectedOption: "Valid", bids: [] };
+        this.state = { selectedOption: "Valid", bids: [], filteredAuctions: [] };
         this.handleDateChoice = this.handleDateChoice.bind(this);
         /*this.handleOptionChange = changeEvent => {
             this.setState({
@@ -21,6 +21,34 @@ export default class StartPage extends React.Component{
 
     componentDidMount(){
         this.props.auctions.map((auction) => (APIModule.GetBids(auction.AuktionID).then(function(promise){ return promise; }).then((data) => this.setState({ bids: this.state.bids.concat(data) }) )));
+        let filtered = [];
+        let shortTime = [];
+        let shortTimeSorted = [];
+        if(this.props.auctions.length !== 0){
+            let currentDate = new Date();
+            filtered = this.props.auctions.filter(function(auction){ 
+                let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
+                return +currentDate < +auctionDate; 
+            });
+
+            shortTime = filtered.filter(function(auction){
+                let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
+                return (+auctionDate - +currentDate) < 86400000;
+            });
+
+            console.log(shortTime);
+
+            shortTimeSorted = shortTime.sort(function(a, b){
+                let firstDate = new Date(a.SlutDatum.replace('T', ' '));
+                let secondDate = new Date(b.SlutDatum.replace('T', ' '));
+                return +firstDate - +secondDate;
+            });
+            console.log(shortTimeSorted);
+            this.setState({ filteredAuctions: shortTimeSorted });
+        }
+        else{
+            this.setState({ filteredAuctions: filtered });
+        }
     }
 
     GetHighestPriceFirst(auctions){
@@ -85,28 +113,6 @@ export default class StartPage extends React.Component{
         //     GetShortestTimeLeft*/
         //     console.log("PROPS: "+this.props.auctions);
         //     let data = this.GetHighestPriceFirst(this.props.auctions);
-        let testAuctions = [];
-        let shortTime = [];
-        let shortTimeSorted = [];
-        if(this.props.auctions.length !== 0){
-            let currentDate = new Date();
-            testAuctions = this.props.auctions.filter(function(auction){ 
-                let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
-                return +currentDate < auctionDate 
-            });
-
-            shortTime = testAuctions.filter(function(auction){
-                let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
-                return (+currentDate - +auctionDate) < 86400000;
-            });
-
-            shortTimeSorted = shortTime.sort(function(a, b){
-                let firstDate = new Date(a.SlutDatum.replace('T', ' '));
-                let secondDate = new Date(b.SlutDatum.replace('T', ' '));
-                return +firstDate - +secondDate;
-            });
-            console.log(shortTimeSorted);
-        }
         // let test = testAuctions.map(function(auction){
         //     let sorted = this.state.bids.sort(function(a,b){
         //         return parseInt(b.Summa) - parseInt(a.Summa);
@@ -117,23 +123,24 @@ export default class StartPage extends React.Component{
         //         <h2>Highest price: {sorted[0].Summa}</h2>
         //     </div>)
         // });
-        let currentBids = this.state.bids;
-        if(this.state.bids.length !== 0){
-            let test2 = testAuctions.sort(function(a, b){
-                let first = currentBids.filter(function(bid){ return bid.AuktionID === a.AuktionID });
-                let second = currentBids.filter(function(bid){ return bid.AuktionID === b.AuktionID });
-                return second.length - first.length;
-            });
-            console.log(test2);
-        }
-        auctions = this.props.auctions.map(auction =>
+        // let currentBids = this.state.bids;
+        // if(this.state.bids.length !== 0){
+        //     let test2 = testAuctions.sort(function(a, b){
+        //         let first = currentBids.filter(function(bid){ return bid.AuktionID === a.AuktionID });
+        //         let second = currentBids.filter(function(bid){ return bid.AuktionID === b.AuktionID });
+        //         return second.length - first.length;
+        //     });
+        //     console.log(test2);
+        // }
+        console.log(this.state.filteredAuctions);
+        auctions = this.state.filteredAuctions.map(auction =>
             <div className="auction-item" key={auction.AuktionID}><p>{auction.Titel}</p></div>
         );
-        let bids = this.state.bids.map((bid) => 
-            <div>
-                <h2>Summa: {bid.Summa}</h2>
-            </div>
-        );
+        // let bids = this.state.bids.map((bid) => 
+        //     <div>
+        //         <h2>Summa: {bid.Summa}</h2>
+        //     </div>
+        // );
         // }
         // else if (this.state.selectedOption === "Invalid"){ // Short time left
         //     let data = GetShortestTimeLeft(this.props.auctions);
@@ -200,7 +207,6 @@ export default class StartPage extends React.Component{
 
                     <div className="auction-items-container">
                         {auctions}
-                        {bids.length}
                     </div>
                 </div>
             </div>
