@@ -26,7 +26,7 @@ export default class Navbar extends React.Component{
             <div className="navigation">
                 <div className="logo">
                     <NavLink className="navbarLink" to="/">
-                        <h1 className="logoText">LMG Auction</h1>
+                        <h1 className="logoText">LMG Auktion</h1>
                     </NavLink>
                 </div>
                 <div className="searchBar">

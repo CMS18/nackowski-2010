@@ -52,6 +52,7 @@ export default class AuctionApp extends React.Component {
         />
         {this.state.auctions.map(auction => (
           <Route
+            key={auction.AuktionID}
             path={'/DetailView/' + auction.AuktionID}
             component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} />}
           />

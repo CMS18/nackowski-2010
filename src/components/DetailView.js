@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import 'moment/locale/sv';
 import { BidView } from './BidView';
+import { type } from 'os';
 
 export class DetailView extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ export class DetailView extends React.Component {
       auction: props.auction,
       status: false,
       bids: [],
-      showBids: false
+      showBids: false,
+      bidsUpdate: false
     };
     this.showUpdateDiv = this.showUpdateDiv.bind(this);
     this.showOriginalDiv = this.showOriginalDiv.bind(this);
@@ -28,6 +30,7 @@ export class DetailView extends React.Component {
     this.deleteAuction = this.deleteAuction.bind(this);
     this.handleCloseBids = this.handleCloseBids.bind(this);
     this.handleShowBids = this.handleShowBids.bind(this);
+    this.onUpdateBids = this.onUpdateBids.bind(this);
     // this.onUpdate = this.onUpdate.bind(this);
   }
 
@@ -35,10 +38,17 @@ export class DetailView extends React.Component {
     if (prevState.status !== this.state.status) {
       this.onUpdate();
     }
+    if(prevState.bidsUpdate !== this.state.bidsUpdate){
+      APIModule.GetBids(this.props.auction.AuktionID).then(function (response) { return response; }).then((data) => this.setState({ bids: data }));
+    }
   }
 
   componentDidMount() {
     APIModule.GetBids(this.props.auction.AuktionID).then(function (response) { return response; }).then((data) => this.setState({ bids: data }));
+  }
+
+  onUpdateBids(value){
+    this.setState({ bidsUpdate: value });
   }
 
   handleCloseBids() {
@@ -95,16 +105,16 @@ export class DetailView extends React.Component {
   }
 
   updateStartDate(date) {
-    const startDate = date;
+    const startDate = new Date(date);
     const auction = this.state.auction;
-    auction.StartDatum = startDate;
+    auction.StartDatum = startDate.toISOString().substring(0, 19);
     this.setState({ auction: auction });
   }
 
   updateDueDate(date) {
-    const dueDate = date;
+    const dueDate = new Date(date);
     const auction = this.state.auction;
-    auction.SlutDatum = dueDate;
+    auction.SlutDatum = dueDate.toISOString().substring(0, 19);
     this.setState({ auction: auction });
   }
 
@@ -124,7 +134,12 @@ export class DetailView extends React.Component {
     let currentDate = new Date();
     let auctionDate;
     if(this.state.auction !== null){
-      auctionDate = new Date(this.state.auction.SlutDatum.replace('T', ' '));
+      if(this.state.auction.SlutDatum ){
+        auctionDate = new Date(this.state.auction.SlutDatum.replace('T', ' '));
+      }
+      else{
+        auctionDate = this.state.SlutDatum;
+      }
     }
     let length;
     if (this.state.bids !== null) {
@@ -187,7 +202,6 @@ export class DetailView extends React.Component {
                     {+currentDate < +auctionDate ?
                     <div className="marginTopBtn">
                       <div className="createAuction">
-                        <button className="styledbtn">Visa bud</button>
                         <button
                           className="styledbtn"
                           onClick={this.showUpdateDiv}
@@ -198,7 +212,7 @@ export class DetailView extends React.Component {
                       </div>
                     </div>
                     : null}
-                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} />
+                    <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} onUpdateBids={this.onUpdateBids} bidsUpdate={this.state.bidsUpdate} />
                   </div>
                 </div>
               </div>
@@ -362,7 +376,7 @@ export class DetailView extends React.Component {
                 <div className="test2">
                   <div className="marginTopBtn">
                   </div>
-                  <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} />
+                  <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} onUpdateBids={this.onUpdateBids} bidsUpdate={this.state.bidsUpdate} />
                 </div>
               </div>
             </div>

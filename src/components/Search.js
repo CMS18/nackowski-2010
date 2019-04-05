@@ -90,7 +90,7 @@ export default class Search extends React.Component {
                     <NavLink className="foundAuctionLinks" to={"/DetailView/" + auction.AuktionID}>
                         <h2>{auction.Titel}</h2>
                         <p>Slutar: {auction.SlutDatum.replace('T', ' ')}</p>
-                        <h5>Pris: {auction.Utropspris}</h5>
+                        <h5>Utropspris: {auction.Utropspris}</h5>
                     </NavLink>
                 </li>
             );
