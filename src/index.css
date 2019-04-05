@@ -108,7 +108,7 @@ input.error {
   align-items: center;
 }
 
-.createAuction button {
+.createAuction .createAuctionbtn {
   background-color: #519e8a;
   color: #fff;
   border: 2px solid #fff;
@@ -129,6 +129,7 @@ input.error {
 
 .navigation {
   width: 100%;
+  height: 7%;
   margin: auto;
   position: fixed;
   top: 0;
@@ -138,6 +139,34 @@ input.error {
   box-shadow: 1px 1px 2px black;
   overflow: hidden;
   background-color: #ffcf3c;
+}
+
+.navbarLink {
+  text-decoration: none;
+  color: black;
+  font-size: small;
+  font-variant: petite-caps;
+  text-shadow: 2px 2px 4px darkslategrey;
+}
+
+.logoText {
+  font-weight: bold;
+}
+
+.foundAuctionLinks {
+  text-decoration: none;
+  color: black;
+}
+
+.foundAuctionLinks > h2 {
+  text-shadow: 2px 2px 8px darkslategray;
+}
+
+.search{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .searchBar {
@@ -174,12 +203,16 @@ input.error {
   outline: none;
 }
 
-@keyframes getResults{
-  0% {margin-left: 1000px;}
-  100%{margin-left: 155px;}
+@keyframes getResults {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: 155px;
+  }
 }
 
-.searchContainer{
+.searchContainer {
   margin: auto;
   width: 80%;
   display: flex;
@@ -189,8 +222,16 @@ input.error {
   animation-duration: 1s;
 }
 
+.removeScrollbar{
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
 .searchResults {
   margin: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .dateCheck {
@@ -202,13 +243,13 @@ input.error {
   width: 15%;
   padding: 0.1%;
   height: 3vh;
-  border-radius: .8em .8em .8em .8em; 
+  border-radius: 0.8em 0.8em 0.8em 0.8em;
   box-shadow: 0px 2px 15px #555;
 }
 
 .validDates {
   width: 50%;
-  border-radius: .8em .8em .8em .8em; 
+  border-radius: 0.8em 0.8em 0.8em 0.8em;
   background-color: darkslategrey;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -259,10 +300,10 @@ input.error {
   justify-content: center;
 }
 
-.foundAuctions{
+.foundAuctions {
   transition-duration: 1s;
-  box-shadow: 0px 10px 50px #555;
-  border-radius: .4em .4em .4em 0.4em;
+  box-shadow: 0px 10px 25px #555;
+  border-radius: 0.4em 0.4em 0.4em 0.4em;
   margin-bottom: 5%;
   margin-left: 2%;
   margin-right: 2%;
@@ -270,17 +311,134 @@ input.error {
   padding-right: 1%;
 }
 
-.foundAuctions:hover{
+.foundAuctions:hover {
   padding-left: 2%;
   padding-right: 2%;
   cursor: pointer;
 }
 
-.detailViewContent{
+.test1{
+  width: 70%;
+}
+
+.test2{
+  width: 30%;
+}
+
+.detailViewContent {
   margin: auto;
   display: flex;
   justify-content: center;
   margin-top: 10%;
+}
+
+.showBidsText {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.winnerText{
+  text-align: center;
+}
+
+.makeNewBidContent{
+  display: flex;
+  justify-content: center;
+}
+
+.newBidForm{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bidInput{
+  width: 90%;
+  align-self: center;
+  text-align: center;
+}
+
+
+.showBidsTag {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+.currentBidViewContent{
+  position: absolute;
+  background-color: white;
+  align-self: center;
+  top: 10%;
+  left: 27.5%;
+  width: 45%;
+  height: 65%;
+  border-radius: .4em .4em .4em .4em;
+  box-shadow: 0px 20px 50px #555;
+  z-index: 50;
+}
+
+.bidText{
+  width: 30%;
+}
+
+.currentBids{
+  width: 90%;
+  height: 75%;
+  margin: auto;
+  overflow-y: scroll;
+}
+
+.closeButton{
+  width: 2%;
+  margin: auto;
+  font-size: larger;
+  margin-right: 2%;
+  margin-top: 1%;
+  cursor: pointer;
+}
+
+.currentBidViewBackdrop{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0.5;
+}
+
+.bidInfoText{
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
+}
+
+.bidHistoryHeader{
+  display: flex;
+}
+
+.bidHistoryHeaderText{
+  width: 98%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.bidHistoryText{
+  margin-left: 2%;
+  font-size: large;
+}
+
+.bid{
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
 }
 
 /*BEGIN-STARTSIDAN*/
@@ -358,7 +516,7 @@ h2 {
   bottom: 0;
 }
 .auction-item:nth-child(-n+4) {
-  justify-content: space-between;
+  justify-content: space-between;/*
 }
 
 .auction-item:nth-child(n+4-n+2){
@@ -375,4 +533,53 @@ h2 {
 .columns {
   justify-content: space-between;
   display: flex;
+}
+
+.presentAuctionInfo {
+  height: 65px;
+  overflow: auto;
+  font-size: 20px;
+}
+
+.labelsPresentation {
+  margin-right: 60px;
+}
+
+.labelCols {
+  justify-content: space-between;
+  display: flex;
+}
+
+.presentCols {
+  display: flex;
+}
+
+.presentCol1 {
+  margin-right: 50px;
+}
+
+.form-wrapper2 {
+  margin-top: 10%;
+  width: 500px;
+  display: flex;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 50px #555;
+  background-color: #ffffff;
+  height: 450px;
+}
+
+
+.createAuction .styledbtn {
+  background-color: #519e8a;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 100%;
+  width: 100px;
+  margin-top: 1em;
+  padding: 8px 0px;
+  font-size: 1em;
+  /* font-weight: lighter; */
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
 }
