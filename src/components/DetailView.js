@@ -38,7 +38,7 @@ export class DetailView extends React.Component {
     if (prevState.status !== this.state.status) {
       this.onUpdate();
     }
-    if(prevState.bidsUpdate !== this.state.bidsUpdate){
+    if (prevState.bidsUpdate !== this.state.bidsUpdate) {
       APIModule.GetBids(this.props.auction.AuktionID).then(function (response) { return response; }).then((data) => this.setState({ bids: data }));
     }
   }
@@ -47,7 +47,7 @@ export class DetailView extends React.Component {
     APIModule.GetBids(this.props.auction.AuktionID).then(function (response) { return response; }).then((data) => this.setState({ bids: data }));
   }
 
-  onUpdateBids(value){
+  onUpdateBids(value) {
     this.setState({ bidsUpdate: value });
   }
 
@@ -133,11 +133,11 @@ export class DetailView extends React.Component {
       : new Date();
     let currentDate = new Date();
     let auctionDate;
-    if(this.state.auction !== null){
-      if(this.state.auction.SlutDatum ){
+    if (this.state.auction !== null) {
+      if (this.state.auction.SlutDatum) {
         auctionDate = new Date(this.state.auction.SlutDatum.replace('T', ' '));
       }
-      else{
+      else {
         auctionDate = this.state.SlutDatum;
       }
     }
@@ -200,18 +200,18 @@ export class DetailView extends React.Component {
                   </div>
                   <div className="test2">
                     {+currentDate < +auctionDate ?
-                    <div className="marginTopBtn">
-                      <div className="createAuction">
-                        <button
-                          className="styledbtn"
-                          onClick={this.showUpdateDiv}
-                        >
-                          Uppdatera
+                      <div className="marginTopBtn">
+                        <div className="createAuction">
+                          <button
+                            className="styledbtn"
+                            onClick={this.showUpdateDiv}
+                          >
+                            Uppdatera
                       </button>
-                        <button className="styledbtn" onClick={this.deleteAuction}>Ta bort</button>
+                          <button className="styledbtn" onClick={this.deleteAuction}>Ta bort</button>
+                        </div>
                       </div>
-                    </div>
-                    : null}
+                      : null}
                     <BidView showBids={this.state.showBids} handleCloseBids={this.handleCloseBids} handleShowBids={this.handleShowBids} auction={this.state.auction} bids={this.state.bids} onUpdateBids={this.onUpdateBids} bidsUpdate={this.state.bidsUpdate} />
                   </div>
                 </div>
@@ -269,7 +269,7 @@ export class DetailView extends React.Component {
                           <div className="presentAuctionInfo">
                             <DatePicker
                               className="updateInput"
-                              selected={moment(
+                              selected={moment.utc(
                                 this.state.auction.StartDatum
                               ).toDate()}
                               timeInputLabel="Time:"
@@ -282,7 +282,7 @@ export class DetailView extends React.Component {
                           <div className="presentAuctionInfo">
                             <DatePicker
                               className="updateInput"
-                              selected={moment(
+                              selected={moment.utc(
                                 this.state.auction.SlutDatum
                               ).toDate()}
                               timeInputLabel="Time:"
