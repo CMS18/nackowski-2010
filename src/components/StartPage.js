@@ -1,5 +1,6 @@
 import React from 'react';
 import { APIModule } from '../modules';
+import { NavLink } from 'react-router-dom';
 
 export default class StartPage extends React.Component{
     constructor(props){
@@ -205,10 +206,6 @@ export default class StartPage extends React.Component{
         }
     }
 
-    
-/**    handleDateChoice(e){
-        
-    } */
 
     GetMostBidsFirst(){
         let aucutionOrderByMostBids
@@ -230,7 +227,7 @@ export default class StartPage extends React.Component{
     FilterByValidAuctions(auctions){
         if(this.props.auctions.length !== 0){
             let currentDate = new Date();
-            auctions = auctions.filter(function(auction){ 
+            auctions = auctions.filter(function(auction){
                 let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
                 return +currentDate < auctionDate });
         }
@@ -256,11 +253,14 @@ export default class StartPage extends React.Component{
     render(){
         let auctions = [];
             auctions = this.state.filteredAuctions.map((auction) =>
-                (<div className="auction-item" key={auction.AuktionID}>
-                        <p>{auction.Titel}</p>
-                            <br></br>
-                        <p>[Antal Bud:{this.GetNrOfBidsForThisAuction(auction.AuktionID)}]{auction.SlutDatum.replace('T', '\n')}</p>
-                    </div>)
+                    (<li className="foundAuctions" key={auction.AuktionID}>
+                        <NavLink className="foundAuctionLinks" to={"/DetailView/" + auction.AuktionID}>
+                            <h2>{auction.Titel}</h2>
+                            <p>Slutar: {auction.SlutDatum.replace('T', ' ')}</p>
+                            <h5>Utropspris: {auction.Utropspris}</h5>
+                            <h5>{this.GetNrOfBidsForThisAuction(auction.AuktionID)} bud</h5>
+                        </NavLink>
+                    </li>)
             )
         return(
             <div className="startPage-Items">
@@ -301,8 +301,10 @@ export default class StartPage extends React.Component{
 
                     </div>
 
-                    <div className="auction-items-container">
-                        {auctions}
+                    <div className="searchContainer">{/*auction-items-container">*/}
+                        <ul className="searchResultList">
+                            {auctions}
+                        </ul>
                     </div>
                 </div>
             </div>
