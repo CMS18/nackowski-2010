@@ -11,13 +11,17 @@ code {
     monospace;
 }
 
+.pageContent{
+  background-color: #f4f4f5;
+}
+
 .wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  /*background-color: white;*/
   /* background-color: #f2d859; */
 }
 
@@ -245,6 +249,7 @@ input.error {
   height: 3vh;
   border-radius: 0.8em 0.8em 0.8em 0.8em;
   box-shadow: 0px 2px 15px #555;
+  background-color: white;
 }
 
 .validDates {
@@ -309,6 +314,7 @@ input.error {
   margin-right: 2%;
   padding-left: 1%;
   padding-right: 1%;
+  background-color: white;
 }
 
 .foundAuctions:hover {
@@ -441,6 +447,31 @@ input.error {
   border-bottom: 1px solid black;
 }
 
+.footerContent{
+  height: 20vh;
+  margin: auto;
+  margin-top: 5%;
+  background-color: #2d3742;
+  box-shadow: 0px 10px 50px black;
+}
+
+.footer{
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content{
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-variant: petite-caps;
+  text-shadow: 2px 2px 4px black;
+  width: 65%;
+}
+
 /*BEGIN-STARTSIDAN*/
 
 .startPage-Items {
@@ -449,7 +480,12 @@ input.error {
 }
 
 .items {
+  margin: auto;
   margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #StartPage-h1 {
@@ -472,12 +508,13 @@ h2 {
   border: 1px solid green;
   padding: 20px 0 20px 0;
   width: 80%;
-  position: relative;
-  left: 10%;
-
+  display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  margin-top: 5%;
 }
 
 .auction-item {
@@ -486,6 +523,7 @@ h2 {
   width: 20%;
   margin: 1%;
   border: 1px solid red;
+  text-align: center;
 }
 
 .auction-item :nth-child(1) {

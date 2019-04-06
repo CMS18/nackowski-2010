@@ -51,7 +51,7 @@ export default class StartPage extends React.Component{
 
             shortTime = filtered.filter(function(auction){
                 let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
-                return (+currentDate - +auctionDate) < 86400000;
+                return (+auctionDate - +currentDate) < 86400000;
             });
 
             shortTimeSorted = shortTime.sort(function(a, b){
