@@ -52,7 +52,7 @@ export default class StartPage extends React.Component{
 
             shortTime = filtered.filter(function(auction){
                 let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
-                return (+auctionDate - +currentDate) < 86400000;
+                return (+auctionDate - +currentDate) < (86400000 * 7);
             });
 
             shortTimeSorted = shortTime.sort(function(a, b){
@@ -160,7 +160,7 @@ export default class StartPage extends React.Component{
 
             shortTime = testAuctions.filter(function(auction){
                 let auctionDate = new Date(auction.SlutDatum.replace('T', ' '));
-                return (+auctionDate - +currentDate) < 86400000;
+                return (+auctionDate - +currentDate) < (86400000 * 7);
             });
 
             shortTimeSorted = shortTime.sort(function(a, b){
