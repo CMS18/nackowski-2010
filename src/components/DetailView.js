@@ -5,7 +5,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import 'moment/locale/sv';
 import { BidView } from './BidView';
-import { type } from 'os';
 
 export class DetailView extends React.Component {
   constructor(props) {
@@ -105,16 +104,18 @@ export class DetailView extends React.Component {
   }
 
   updateStartDate(date) {
-    const startDate = new Date(date);
+    const newStartDate = new Date(date);
+    newStartDate.setHours(newStartDate.getHours() + 2);
     const auction = this.state.auction;
-    auction.StartDatum = startDate.toISOString().substring(0, 19);
+    auction.StartDatum = newStartDate.toISOString().substring(0, 19);
     this.setState({ auction: auction });
   }
 
   updateDueDate(date) {
-    const dueDate = new Date(date);
+    const newDueDate = new Date(date);
+    newDueDate.setHours(newDueDate.getHours() + 2);
     const auction = this.state.auction;
-    auction.SlutDatum = dueDate.toISOString().substring(0, 19);
+    auction.SlutDatum = newDueDate.toISOString().substring(0, 19);
     this.setState({ auction: auction });
   }
 
@@ -269,7 +270,7 @@ export class DetailView extends React.Component {
                           <div className="presentAuctionInfo">
                             <DatePicker
                               className="updateInput"
-                              selected={moment.utc(
+                              selected={moment(
                                 this.state.auction.StartDatum
                               ).toDate()}
                               timeInputLabel="Time:"
@@ -282,7 +283,7 @@ export class DetailView extends React.Component {
                           <div className="presentAuctionInfo">
                             <DatePicker
                               className="updateInput"
-                              selected={moment.utc(
+                              selected={moment(
                                 this.state.auction.SlutDatum
                               ).toDate()}
                               timeInputLabel="Time:"

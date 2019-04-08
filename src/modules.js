@@ -90,36 +90,14 @@ export var APIModule = (function () {
       SkapadAv: auction.SkapadAv
     };
 
-    let startDate = new Date(newauction.StartDatum);
-    startDate.setHours(startDate.getHours() + 2);
+    // const newStartDate = new Date(newauction.StartDatum);
+    // newStartDate.setHours(newStartDate.getHours() + 2);
+    // newauction.StartDatum = newStartDate;
 
-    let dueDate = new Date(newauction.SlutDatum);
-    dueDate.setHours(dueDate.getHours() + 2);
+    // const newDueDate = new Date(newauction.SlutDatum);
+    // newDueDate.setHours(newDueDate.getHours() + 2);
+    // newauction.SlutDatum = newDueDate;
 
-    newauction.StartDatum = startDate;
-    newauction.SlutDatum = dueDate;
-
-    console.log('start', newauction.StartDatum);
-    console.log('slut', newauction.dueDate);
-
-    // let slut = new Date(dueDate);
-    // slut.setHours(dueDate.getHours() + 2);
-    //   const body = JSON.stringify({
-    //   Titel: title,
-    //   Beskrivning: description,
-    //   StartDatum: start,
-    //   SlutDatum: slut,
-    //   Gruppkod: 2010,
-    //   Utropspris: acceptedPrice,
-    //   SkapadAv: createdBy
-    // });
-
-    // await fetch(url, {
-    //   method: 'POST',
-    //   body: newauction,
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
     await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(newauction),
@@ -128,7 +106,7 @@ export var APIModule = (function () {
         'Content-Type': 'application/json'
       }
     }).then(function (data) {
-      console.log('Request success: ', 'posten uppdaterad');
+      console.log('Request success: ', 'posten uppdaterad', 'new auction efter', newauction);
     });
   }
 
