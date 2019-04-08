@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { APIModule } from '../modules';
-import { NavLink } from 'react-router-dom';
 
 export default class StartPage extends React.Component{
     constructor(props){
