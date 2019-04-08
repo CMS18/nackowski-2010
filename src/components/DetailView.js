@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import 'moment/locale/sv';
 import { BidView } from './BidView';
+import { Redirect } from 'react-router';
 
 export class DetailView extends React.Component {
   constructor(props) {
@@ -15,8 +16,10 @@ export class DetailView extends React.Component {
       status: false,
       bids: [],
       showBids: false,
-      bidsUpdate: false
+      bidsUpdate: false,
+      redirectToStartPage: false
     };
+
     this.showUpdateDiv = this.showUpdateDiv.bind(this);
     this.showOriginalDiv = this.showOriginalDiv.bind(this);
     this.updatePost = this.updatePost.bind(this);
@@ -76,11 +79,13 @@ export class DetailView extends React.Component {
   deleteAuction() {
     const auction = this.state.auction;
     APIModule.DeleteAuction(auction).then(function (response) { return response; }).then((data) => this.setState({ status: !this.state.status }));
+    this.setState({ redirectToStartPage: true });
   }
 
   updatePost() {
     const auction = this.state.auction;
     APIModule.UpdateAuction(auction).then(function (response) { return response; }).then((data) => this.setState({ status: !this.state.status }));
+    this.setState({ redirectToStartPage: true });
   }
 
   updateTitle(e) {
@@ -146,6 +151,11 @@ export class DetailView extends React.Component {
     let length;
     if (this.state.bids !== null) {
       length = this.state.bids.length;
+    }
+
+    const redirectToStartPage = this.state.redirectToStartPage;
+    if (redirectToStartPage === true) {
+      return <Redirect to="/" />;
     }
 
     return (
