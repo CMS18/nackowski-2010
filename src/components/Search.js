@@ -12,6 +12,7 @@ export default class Search extends React.Component {
     }
 
     componentDidMount() {
+        window.scroll(0, 0);
         let currentAuctions = this.props.auctions;
         let value = this.props.searchValue;
         let auctionFound = currentAuctions.filter(function (auction) { return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1 });

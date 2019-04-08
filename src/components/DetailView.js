@@ -44,6 +44,7 @@ export class DetailView extends React.Component {
   }
 
   componentDidMount() {
+    window.scroll(0, 0);
     APIModule.GetBids(this.props.auction.AuktionID).then(function (response) { return response; }).then((data) => this.setState({ bids: data }));
   }
 

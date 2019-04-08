@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { APIModule } from '../modules';
 
 export default class StartPage extends React.Component{
@@ -23,6 +24,7 @@ export default class StartPage extends React.Component{
     }
 
     componentDidMount(){
+        window.scroll(0, 0);
         this.props.auctions.map((auction) => (
             APIModule.GetBids(auction.AuktionID)
             .then(function(promise){
@@ -193,12 +195,12 @@ export default class StartPage extends React.Component{
         let radioTwo = document.getElementById('InvalidDates');
         if (value === "Valid"){
             radioOne.style.backgroundColor = "white";
-            radioTwo.style.backgroundColor = "black";
+            radioTwo.style.backgroundColor = "darkslategrey";
             this.FilterHandpicked();
             console.log("HANDPICKED");
         }
         else if (value === "Invalid"){
-            radioOne.style.backgroundColor = "black";
+            radioOne.style.backgroundColor = "darkslategrey";
             radioTwo.style.backgroundColor = "white";
             this.FilterShortTimeLeft();
             console.log("ShortTimeLeft");
@@ -255,24 +257,41 @@ export default class StartPage extends React.Component{
 
     render(){
         let auctions = [];
+        if(this.state.filteredAuctions.length !== 0){
             auctions = this.state.filteredAuctions.map((auction) =>
-                (<div className="auction-item" key={auction.AuktionID}>
-                        <p>{auction.Titel}</p>
-                            <br></br>
-                        <p>[Antal Bud:{this.GetNrOfBidsForThisAuction(auction.AuktionID)}]{auction.SlutDatum.replace('T', '\n')}</p>
-                    </div>)
+                (
+                    <div className="foundAuctions" key={auction.AuktionID}>
+                        <NavLink className="foundAuctionLinks" to={"/DetailView/" + auction.AuktionID}>
+                            <h2>{auction.Titel}</h2>
+                            <p>Antal Bud:{this.GetNrOfBidsForThisAuction(auction.AuktionID)}</p>
+                            <p>Slutar: {auction.SlutDatum.replace('T', '\n')}</p>
+                            <h5>Utropspris: {auction.Utropspris}</h5>
+                        </NavLink>
+                    </div>
+                )
+            );
+        }
+        else{
+            auctions = (
+                <li className="Error">
+                    <h2>Inga auktioner hittades</h2>
+                    <p>Det är för tillfället inga auktioner som matchar det här filtret.</p>
+                </li>
             )
+        }
         return(
             <div className="startPage-Items">
-                <div className="items">
-                    <h1 id="StartPage-h1">Välkommen till Nackowskis – en av Världens största marknadsplatser</h1>
-                    <p id="p-tag-under-h1">Här shoppar du hållbart bland miljontals unika saker och fynd</p>
-                    <h2>Trendar på Nackowskis</h2>
-                    <div className="dateChoices">
-                        <p className="oldText">Short time left</p>
-                        <p className="currentText">Hand picked</p>
+                <div className="startPageContent">
+                    <div className="siteInfo">
+                        <h1 id="StartPage-h1">Välkommen till Nackowskis – en av Världens största marknadsplatser</h1>
+                        <p id="p-tag-under-h1">Här shoppar du hållbart bland miljontals unika saker och fynd</p>
+                        <h2>Trendar på Nackowskis</h2>
                     </div>
-                    
+                    <div className="dateChoices">
+                            <p className="currentText">Short time left</p>
+                            <p className="oldText">Hand picked</p>
+                    </div>
+                        
                     <div className="dateCheck">
 
                         <div id="ValidDates" className="validDates"> {/* Handpicked */}
@@ -298,11 +317,11 @@ export default class StartPage extends React.Component{
                                 value="Invalid"
                                 />
                         </div>
-
                     </div>
-
-                    <div className="auction-items-container">
-                        {auctions}
+                    <div className="items">
+                        <div className="auction-items-container">
+                            {auctions}
+                        </div>
                     </div>
                 </div>
             </div>

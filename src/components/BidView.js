@@ -20,7 +20,7 @@ export class BidView extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevState.status != this.state.status){
+        if(prevState.status !== this.state.status){
             this.onBidsUpdate();
         }
     }
