@@ -282,8 +282,8 @@ export default class StartPage extends React.Component{
                         <h2>Trendar på LMG</h2>
                     </div>
                     <div className="dateChoices">
-                            <p className="currentText">Short time left</p>
-                            <p className="oldText">Hand picked</p>
+                            <p className="currentText">Kort tid kvar!</p>
+                            <p className="oldText">Populära auktioner</p>
                     </div>
                         
                     <div className="dateCheck">
