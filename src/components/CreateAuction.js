@@ -29,6 +29,10 @@ export default class CreateAuction extends Component {
     };
   }
 
+  componentDidMount(){
+    window.scroll(0, 0);
+  }
+
   formValid = ({ formErrors, ...rest }) => {
     let valid = true;
 
