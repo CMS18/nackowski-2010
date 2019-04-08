@@ -21,7 +21,12 @@ export default class Search extends React.Component {
             let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
             return +todaysDate < +dueDate;
         });
-        this.setState({ foundAuctions: validAuctions });
+        let sortedValidAuctions = validAuctions.sort(function(a, b){
+            let firstDate = new Date(a.SlutDatum.replace('T', ' '));
+            let secondDate = new Date(b.SlutDatum.replace('T', ' '));
+            return +firstDate - +secondDate;
+        });
+        this.setState({ foundAuctions: sortedValidAuctions });
     }
 
     componentDidUpdate(prevProps) {
@@ -57,7 +62,12 @@ export default class Search extends React.Component {
             let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
             return +todaysDate < +dueDate;
         });
-        this.setState({ foundAuctions: validAuctions });
+        let sortedValidAuctions = validAuctions.sort(function(a, b){
+            let firstDate = new Date(a.SlutDatum.replace('T', ' '));
+            let secondDate = new Date(b.SlutDatum.replace('T', ' '));
+            return +firstDate - +secondDate;
+        });
+        this.setState({ foundAuctions: sortedValidAuctions });
     }
 
     handleInvalidDateChoice(e) {
@@ -67,12 +77,17 @@ export default class Search extends React.Component {
         radioTwo.style.backgroundColor = "darkslategrey";
         let value = this.props.searchValue;
         let auctionFound = this.props.auctions.filter(function (auction) { return auction.Titel.toLowerCase().indexOf(value.toLowerCase()) !== -1 });
-        let validAuctions = auctionFound.filter(function (auction) {
+        let invalidAuctions = auctionFound.filter(function (auction) {
             let todaysDate = new Date();
             let dueDate = new Date(auction.SlutDatum.replace('T', ' '));
             return +todaysDate > +dueDate;
         });
-        this.setState({ foundAuctions: validAuctions });
+        let sortedInvalidAuctions = invalidAuctions.sort(function(a, b){
+            let firstDate = new Date(a.SlutDatum.replace('T', ' '));
+            let secondDate = new Date(b.SlutDatum.replace('T', ' '));
+            return +secondDate - +firstDate;
+        });
+        this.setState({ foundAuctions: sortedInvalidAuctions });
     }
 
     render() {

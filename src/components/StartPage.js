@@ -277,9 +277,9 @@ export default class StartPage extends React.Component{
             <div className="startPage-Items">
                 <div className="startPageContent">
                     <div className="siteInfo">
-                        <h1 id="StartPage-h1">Välkommen till Nackowskis – en av Världens största marknadsplatser</h1>
+                        <h1 id="StartPage-h1">Välkommen till LMG Auktion – en av Världens största marknadsplatser</h1>
                         <p id="p-tag-under-h1">Här shoppar du hållbart bland miljontals unika saker och fynd</p>
-                        <h2>Trendar på Nackowskis</h2>
+                        <h2>Trendar på LMG</h2>
                     </div>
                     <div className="dateChoices">
                             <p className="currentText">Short time left</p>
