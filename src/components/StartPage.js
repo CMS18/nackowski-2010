@@ -265,6 +265,14 @@ export default class StartPage extends React.Component{
                     </li>)
             )
         }
+        else{
+            auctions = (
+                <li className="Error">
+                    <h2>Inga auktioner hittades</h2>
+                    <p>Det finns för tillfället inga auktioner som matchar filtret.</p>
+                </li>
+            );
+        }
         return(
             <div className="startPage-Items">
                 <div className="startPageContent">
