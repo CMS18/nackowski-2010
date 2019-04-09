@@ -273,6 +273,13 @@ input.error {
   padding: 1%;
 }
 
+.dateChoicesStart{
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  padding: 1%;
+}
+
 .oldText {
   margin-left: 1%;
 }

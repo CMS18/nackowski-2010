@@ -6,7 +6,6 @@ export default class StartPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {  selectedOption: "Valid", bids: [], auctions: [], filteredAuctions: []};
-        /*this.handleDateChoice = this.handleDateChoice.bind(this);*/
         this.handleOptionChange = changeEvent => {
             this.setState({
               selectedOption: changeEvent.target.value
@@ -20,7 +19,6 @@ export default class StartPage extends React.Component{
         this.GetHighestPriceFirst = this.GetHighestPriceFirst.bind(this);
         this.Get24hAuctions = this.Get24hAuctions.bind(this);
         this.handleStartPageRadioButtons = this.handleStartPageRadioButtons.bind(this);
-        /*this.handleDateChoice = this.handleDateChoice.bind(this);*/
     }
 
     componentDidMount(){
@@ -281,7 +279,7 @@ export default class StartPage extends React.Component{
                         <p id="p-tag-under-h1">Här shoppar du hållbart bland miljontals unika saker och fynd</p>
                         <h2>Trendar på LMG</h2>
                     </div>
-                    <div className="dateChoices">
+                    <div className="dateChoicesStart">
                             <p className="currentText">Kort tid kvar!</p>
                             <p className="oldText">Populära auktioner</p>
                     </div>

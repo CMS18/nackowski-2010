@@ -201,7 +201,8 @@ export class BidView extends React.Component{
                                 <button className="createAuctionbtn" type="submit">Lägg bud</button>
                             </div>
                         </form>
-                    </div> }
+                    </div> 
+                }
             </div>
         );
     }
