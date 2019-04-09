@@ -85,7 +85,6 @@ export class DetailView extends React.Component {
   updatePost() {
     const auction = this.state.auction;
     APIModule.UpdateAuction(auction).then(function (response) { return response; }).then((data) => this.setState({ status: !this.state.status }));
-    this.setState({ redirectToStartPage: true });
   }
 
   updateTitle(e) {
