@@ -98,10 +98,14 @@ export class BidView extends React.Component{
       };
 
     handleOpenCurrentBidView(){
+        let content = document.getElementById('pageContent');
+        content.classList.add('removeScrollbar');
         this.props.handleShowBids();
     }
 
     handleCloseCurrentBidView(){
+        let content = document.getElementById('pageContent');
+        content.classList.remove('removeScrollbar');
         this.props.handleCloseBids();
     }
 

@@ -53,7 +53,7 @@ export default class AuctionApp extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="pageContent">
+        <div className="pageContent" id="pageContent">
           <Navbar searchValue={this.state.searchValue} onChange={this.onChange} />
           <div className="mainContent">
             <Route
