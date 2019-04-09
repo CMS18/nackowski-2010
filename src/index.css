@@ -649,3 +649,7 @@ h2 {
 .content h2 {
   margin: 0 2% 0 2%;
 }
+
+.content h2:hover {
+  font-size: 30px;
+}
