@@ -49,14 +49,16 @@ export var APIModule = (function () {
 
     let start = new Date(startDate);
     start.setHours(startDate.getHours() + 2);
-    let slut = new Date(dueDate);
-    slut.setHours(dueDate.getHours() + 2);
+    let startDateString = start.toISOString().substring(0, 19);
+    let end = new Date(dueDate);
+    end.setHours(dueDate.getHours() + 2);
+    let endDateString = end.toISOString().substring(0, 19);
 
     const body = JSON.stringify({
       Titel: title,
       Beskrivning: description,
-      StartDatum: start,
-      SlutDatum: slut,
+      StartDatum: startDateString,
+      SlutDatum: endDateString,
       Gruppkod: 2010,
       Utropspris: acceptedPrice,
       SkapadAv: createdBy
