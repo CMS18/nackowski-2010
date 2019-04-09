@@ -645,3 +645,7 @@ h2 {
   letter-spacing: 1px;
   margin-bottom: 0.25em;
 }
+
+.content h2 {
+  margin: 0 2% 0 2%;
+}
