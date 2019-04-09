@@ -165,7 +165,7 @@ export class BidView extends React.Component{
                                 <div className="winnerText">
                                     <h4>Vinnare: {bids[0].Budgivare}</h4>
                                     <h4>Bud ID: {bids[0].BudID}</h4>
-                                    <h4>Bud: {bids[0].Summa}</h4>
+                                    <h4>Bud: {bids[0].Summa} kr</h4>
                                 </div>
 
                             :

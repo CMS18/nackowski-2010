@@ -14,6 +14,7 @@ export default class AuctionApp extends React.Component {
     this.state = { auctions: [], searchValue: "", statusUpdated: false };
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+    this.onAuctionUpdate = this.onAuctionUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,10 @@ export default class AuctionApp extends React.Component {
     await this.setState({ statusUpdated: status });
   }
 
+  onAuctionUpdate(status){
+    this.setState({ statusUpdated: status });
+  }
+
   onChange(value) {
     this.setState({ searchValue: value });
   }
@@ -60,7 +65,7 @@ export default class AuctionApp extends React.Component {
               <Route
                 key={auction.AuktionID}
                 path={'/DetailView/' + auction.AuktionID}
-                component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} />}
+                component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} onAuctionUpdate={this.onAuctionUpdate} />}
               />
             ))}
             <Route path="/CreateAuction" component={() => <CreateAuction statusUpdated={this.onUpdate} status={this.state.statusUpdated} />} />

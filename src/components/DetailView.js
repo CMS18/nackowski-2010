@@ -38,6 +38,10 @@ export class DetailView extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.status !== this.state.status) {
+      console.log('Updating Auction..');
+      this.onAuctionUpdate();
+    }
+    if(prevState.redirectToStartPage !== this.state.redirectToStartPage){
       this.onUpdate();
     }
     if (prevState.bidsUpdate !== this.state.bidsUpdate) {
@@ -50,9 +54,9 @@ export class DetailView extends React.Component {
     APIModule.GetBids(this.props.auction.AuktionID).then(function (response) { return response; }).then((data) => this.setState({ bids: data }));
   }
 
-  componentWillUnmount(prevProps, prevState){
-    console.log('Unmounting..');
-    this.onUpdate();
+  onAuctionUpdate(){
+    let status = this.props.status;
+    this.props.onAuctionUpdate(!status);
   }
 
   onUpdateBids(value) {
@@ -76,9 +80,9 @@ export class DetailView extends React.Component {
     this.setState({ noUpdate: true });
   }
 
-  async onUpdate() {
+  onUpdate() {
     const status = this.props.status;
-    await this.props.statusUpdated(!status);
+    this.props.statusUpdated(!status);
   }
 
   deleteAuction() {
