@@ -75,7 +75,11 @@ export class BidView extends React.Component{
         let formErrors = this.state.formErrors;
         let sorted = this.props.bids.sort(function(a, b){ return parseInt(b.Summa) - parseInt(a.Summa)});
         if(sorted.length === 0){
-            sorted = [0];
+            sorted = [ { 
+                        "Budgivare": "",
+                        "Summa": this.props.auction.Utropspris,
+                        "AuctionsID": "" 
+                    } ];
         }
         switch (name) {
           case 'sum':
