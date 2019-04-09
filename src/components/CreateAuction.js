@@ -29,7 +29,7 @@ export default class CreateAuction extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     window.scroll(0, 0);
   }
 
@@ -63,7 +63,6 @@ export default class CreateAuction extends Component {
       createdBy: ${this.state.createdBy}
       `
       );
-      console.log('Innan vi skickar till API', this.state);
       APIModule.PostAuction(this.state);
       this.setState({ redirectToStartPage: true });
     } else {

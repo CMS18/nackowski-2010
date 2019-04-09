@@ -33,7 +33,6 @@ export class DetailView extends React.Component {
     this.handleCloseBids = this.handleCloseBids.bind(this);
     this.handleShowBids = this.handleShowBids.bind(this);
     this.onUpdateBids = this.onUpdateBids.bind(this);
-    // this.onUpdate = this.onUpdate.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {

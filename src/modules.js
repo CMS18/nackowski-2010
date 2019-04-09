@@ -13,7 +13,6 @@ export var APIModule = (function () {
       sum,
       bidder
     } = bid;
-    console.log(bid);
     await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
@@ -90,14 +89,6 @@ export var APIModule = (function () {
       SkapadAv: auction.SkapadAv
     };
 
-    // const newStartDate = new Date(newauction.StartDatum);
-    // newStartDate.setHours(newStartDate.getHours() + 2);
-    // newauction.StartDatum = newStartDate;
-
-    // const newDueDate = new Date(newauction.SlutDatum);
-    // newDueDate.setHours(newDueDate.getHours() + 2);
-    // newauction.SlutDatum = newDueDate;
-
     await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(newauction),
@@ -106,7 +97,7 @@ export var APIModule = (function () {
         'Content-Type': 'application/json'
       }
     }).then(function (data) {
-      console.log('Request success: ', 'posten uppdaterad', 'new auction efter', newauction);
+      console.log('Request success: ', 'posten uppdaterad');
     });
   }
 
@@ -114,7 +105,6 @@ export var APIModule = (function () {
     const url =
       'http://nackowskis.azurewebsites.net/api/Auktion/2010?id=' +
       auction.AuktionID;
-    console.log(url)
     var deleteAuction = {
       AuktionID: auction.AuktionID,
       Titel: auction.Titel,
@@ -125,7 +115,6 @@ export var APIModule = (function () {
       Utropspris: auction.Utropspris,
       SkapadAv: auction.SkapadAv
     };
-    console.log('deleteAuction', deleteAuction);
     await fetch(url, {
       method: 'DELETE',
       body: JSON.stringify(deleteAuction),
