@@ -33,6 +33,16 @@ export default class CreateAuction extends Component {
     window.scroll(0, 0);
   }
 
+  componentWillUnmount(){
+    console.log('Unmounting Create Auction..');
+    this.onUpdate();
+  }
+
+  onUpdate() {
+    const status = this.props.status;
+    this.props.statusUpdated(!status);
+  }
+
   formValid = ({ formErrors, ...rest }) => {
     let valid = true;
 
@@ -63,8 +73,7 @@ export default class CreateAuction extends Component {
       createdBy: ${this.state.createdBy}
       `
       );
-      APIModule.PostAuction(this.state);
-      this.setState({ redirectToStartPage: true });
+      APIModule.PostAuction(this.state).then(function(response){ return response; }).then((data) => this.setState({ redirectToStartPage: !this.state.redirectToStartPage }));
     } else {
       formErrors.isFormValid = false;
       this.setState({ formErrors: formErrors });

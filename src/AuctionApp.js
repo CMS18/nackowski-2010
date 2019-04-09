@@ -25,6 +25,9 @@ export default class AuctionApp extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('Updating auction app..');
+    console.log(prevState.statusUpdated);
+    console.log(this.state.statusUpdated);
     if (prevState.statusUpdated !== this.state.statusUpdated) {
       APIModule.GetAuctions()
         .then(function (promise) {
@@ -34,8 +37,8 @@ export default class AuctionApp extends React.Component {
     }
   }
 
-  onUpdate(status) {
-    this.setState({ statusUpdated: status });
+  async onUpdate(status) {
+    await this.setState({ statusUpdated: status });
   }
 
   onChange(value) {
@@ -60,7 +63,7 @@ export default class AuctionApp extends React.Component {
                 component={() => <DetailView auction={auction} statusUpdated={this.onUpdate} status={this.state.statusUpdated} />}
               />
             ))}
-            <Route path="/CreateAuction" component={() => <CreateAuction />} />
+            <Route path="/CreateAuction" component={() => <CreateAuction statusUpdated={this.onUpdate} status={this.state.statusUpdated} />} />
             <Route
               path="/Search"
               component={() => (

@@ -5,7 +5,7 @@ import { APIModule } from '../modules';
 export default class StartPage extends React.Component{
     constructor(props){
         super(props);
-        this.state = {  selectedOption: "Valid", bids: [], auctions: [], filteredAuctions: []};
+        this.state = {  selectedOption: "Valid", bids: [], auctions: [], filteredAuctions: [] };
         this.handleOptionChange = changeEvent => {
             this.setState({
               selectedOption: changeEvent.target.value
@@ -66,7 +66,6 @@ export default class StartPage extends React.Component{
                 }
             );
         }
-        
     }
 
     GetLastBid(id){
